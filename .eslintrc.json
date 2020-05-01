@@ -25,6 +25,14 @@
     "rules": {
         "react/jsx-filename-extension": [1, {
             "extensions": [".js", ".jsx"]
-        }]
+        }],
+        "linebreak-style": 0,
+        "global-require": 0,
+        "eslint linebreak-style": [0, "error", "windows"],
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "indent": ["error", 4],
+        "no-console": "off",
+        "react/no-array-index-key": "off"
     }
 }
