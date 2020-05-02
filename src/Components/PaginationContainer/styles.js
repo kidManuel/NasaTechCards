@@ -3,6 +3,7 @@ const styles = {
         width: '80vw',
         display: 'flex',
         border: 'solid 1px black',
+        overflow: 'hidden'
     },
 
 };

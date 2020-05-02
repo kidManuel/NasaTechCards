@@ -1,38 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route
+} from "react-router-dom";
+
+import Routes from '../Routes'
+import NavBar from './NavBar'
 import './App.css';
-import API from './TechportApiUtil';
-import PaginationContainer from '../Components/PaginationContainer';
-import TechportCard from '../TechportCard';
+
 
 function App() {
-    const [lastWeekProjects, setLastWeekProjects] = useState();
-
-    useEffect(() => {
-        async function fetchData() {
-            const data = await API.getProjectsUpdatedLastWeek();
-            setLastWeekProjects(data);
-        }
-        fetchData();
-    }, []);
+    const { About, LastUpdated } = Routes;
 
     return (
-        <div className="App">
-            {
-                lastWeekProjects && (
-                    <PaginationContainer>
-                        {
-                            lastWeekProjects.map((singleProject, index) => {
-                                return <TechportCard
-                                    title={singleProject.title}
-                                    key={index}
-                                    paragraph={singleProject.description}
-                                />
-                            })
-                        }
-                    </PaginationContainer>
-                )
-            }
-        </div>
+        <Router>
+
+            <div className="App">
+                <NavBar />
+                <Switch>
+                    <Route exact={true} path="/">
+                        <LastUpdated />
+                    </Route>
+
+                    <Route exact={true} path="/about">
+                        <About />
+                    </Route>
+                </Switch>
+            </div>
+
+        </Router>
     );
 }
 

@@ -84,10 +84,8 @@ async function getProjectsByDate(horizonDate) {
     })
 
     await Promise.all(projectsDataPromises).then(
-        (results) => console.log(results, 'results')
+        (results) => projectsDataSolved = results
     )
-
-    console.log(projectsDataSolved, 'data solved')
 
     return projectsDataSolved;
 }

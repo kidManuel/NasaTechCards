@@ -5,7 +5,8 @@ const styles = {
         display: 'flex',
         background: 'gray',
         flexDirection: 'column',
-        padding: '15px'
+        padding: '15px',
+        overflow: 'hidden'
     },
     techportCardTitle: {
         fontSize: '25px',
