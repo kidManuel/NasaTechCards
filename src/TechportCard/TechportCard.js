@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card, { Slices } from '../Components/Card';
+import styles from './styles'
 
 function TechportCard({ title, paragraph }) {
     const { CardTitle, CardParagraph } = Slices;
-
+    const { techportCardTitle, techportCardParagraph, techportCardBase } = styles;
     return (
-        <Card>
-            <CardTitle text={title} />
-            <CardParagraph text={paragraph} />
+        <Card customStyle={techportCardBase}>
+            <CardTitle text={title} customStyle={techportCardTitle} />
+            <CardParagraph text={paragraph} customStyle={techportCardParagraph} />
         </Card>
 
     );

@@ -5,12 +5,12 @@ import PaginationContainer from '../Components/PaginationContainer';
 import TechportCard from '../TechportCard';
 
 function App() {
-    const [exampleProject, setExampleProject] = useState();
+    const [lastWeekProjects, setLastWeekProjects] = useState();
 
     useEffect(() => {
         async function fetchData() {
-            const data = await API.getExampleProject();
-            setExampleProject(data);
+            const data = await API.getProjectsUpdatedLastWeek();
+            setLastWeekProjects(data);
         }
         fetchData();
     }, []);
@@ -18,16 +18,17 @@ function App() {
     return (
         <div className="App">
             {
-                exampleProject && (
+                lastWeekProjects && (
                     <PaginationContainer>
-                        <TechportCard
-                            title={exampleProject.title}
-                            paragraph={exampleProject.description}
-                        />
-                        <TechportCard
-                            title={exampleProject.title}
-                            paragraph={exampleProject.description}
-                        />
+                        {
+                            lastWeekProjects.map((singleProject, index) => {
+                                return <TechportCard
+                                    title={singleProject.title}
+                                    key={index}
+                                    paragraph={singleProject.description}
+                                />
+                            })
+                        }
                     </PaginationContainer>
                 )
             }

@@ -33,6 +33,7 @@
         "react/jsx-indent-props": ["error", 4],
         "indent": ["error", 4],
         "no-console": "off",
-        "react/no-array-index-key": "off"
+        "react/no-array-index-key": "off",
+        "no-plusplus": "off",
     }
 }

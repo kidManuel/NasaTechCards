@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CardBase({ children }) {
+function CardBase({ children, customStyle }) {
     return (
-        <div className="CardBody">
+        <div className="CardBody" style={customStyle}>
             {
                 children.map((slice, index) => <div key={index} className="CardComponent">{slice}</div>)
             }

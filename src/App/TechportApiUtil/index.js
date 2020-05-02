@@ -5,10 +5,16 @@
     to Techport's API and shouldn't be exported to other projects.
 */
 
-import { getExampleProject } from './TechportApiUtil';
+import {
+    getExampleProject,
+    getProjectsByDate,
+    getProjectsUpdatedLastWeek
+} from './TechportApiUtil';
 
 const API = {
     getExampleProject,
+    getProjectsByDate,
+    getProjectsUpdatedLastWeek
 };
 
 export default API;
