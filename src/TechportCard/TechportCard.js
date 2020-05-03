@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Card, { Slices } from '../Components/Card';
 import theme from '../Components/TechportTheme';
 import styles from './styles';
@@ -16,7 +17,7 @@ function TechportCard({ title, paragraph }) {
 
     return (
         <Card customClass={`${base} ${modalContainer}`}>
-            <CardTitle text={title} customClass={`${themeTitle} ${titleClass}`} />
+            <CardTitle text={title} customClass={`${themeTitle} ${titleClass}`} textClamp={{ lines: 2 }} />
             <CardParagraph text={paragraph} customClass={`${textRead} ${paragraphClass}`} />
         </Card>
     );
