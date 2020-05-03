@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CardParagraph({ text, customStyle }) {
+function CardParagraph({ text, customClass }) {
     return (
-        <p className="CardParagraph" style={customStyle}>{text}</p>
+        <p className={`cardParagraph ${customClass}`}>{text}</p>
     );
 }
 

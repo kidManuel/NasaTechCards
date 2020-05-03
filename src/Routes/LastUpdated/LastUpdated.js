@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-
 import API from '../../TechportApiUtil';
 import PaginationContainer from '../../Components/PaginationContainer'
 import TechportCard from '../../TechportCard';
+import styles from './styles'
 
 const LastUpdated = () => {
+    const classes = styles();
     const [lastWeekProjects, setLastWeekProjects] = useState();
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const LastUpdated = () => {
         <div className="lastUpdated">
             {
                 lastWeekProjects && (
-                    <PaginationContainer>
+                    <PaginationContainer customClassName={classes.container}>
                         {
                             lastWeekProjects.map((singleProject, index) => {
                                 return <TechportCard

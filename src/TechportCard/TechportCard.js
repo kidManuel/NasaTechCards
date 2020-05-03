@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card, { Slices } from '../Components/Card';
-import styles from './styles'
+import theme from '../Components/TechportTheme';
+import styles from './styles';
+
 
 function TechportCard({ title, paragraph }) {
-    const { CardTitle, CardParagraph } = Slices;
-    const { techportCardTitle, techportCardParagraph, techportCardBase } = styles;
-    return (
-        <Card customStyle={techportCardBase}>
-            <CardTitle text={title} customStyle={techportCardTitle} />
-            <CardParagraph text={paragraph} customStyle={techportCardParagraph} />
-        </Card>
+    const classes = styles();
+    const themeClasses = theme();
 
+    const { modalContainer, textRead, title: themeTitle } = themeClasses;
+    const { base, title: titleClass, paragraph: paragraphClass } = classes;
+
+    const { CardTitle, CardParagraph } = Slices;
+
+    return (
+        <Card customClass={`${base} ${modalContainer}`}>
+            <CardTitle text={title} customClass={`${themeTitle} ${titleClass}`} />
+            <CardParagraph text={paragraph} customClass={`${textRead} ${paragraphClass}`} />
+        </Card>
     );
 }
 

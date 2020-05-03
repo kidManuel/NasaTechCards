@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CardTitle({ text, customStyle }) {
+function CardTitle({ text, customClass }) {
     return (
-        <h2 className="CardTitle" style={customStyle}>{text}</h2>
+        <h2 className={`CardTitle ${customClass}`} >{text}</h2>
     );
 }
 
