@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles';
 
-function PaginationContainer({ children }) {
+function PaginationContainer({ children, customClassName }) {
+    const classes = styles();
     const elements = children.length ? children : [children];
-    const { paginationContainer } = styles;
+    const { paginationContainer } = classes;
 
     return (
-        <div className="paginationContainer" style={paginationContainer}>
+        <div className={`${paginationContainer} ${customClassName}`}>
             {
-                elements.map((item, index) => <div key={index} className="paginationContainerElement">{item}</div>)
+                elements.map((item) => item)
             }
         </div>
     );
 }
-
 
 export default PaginationContainer;
 
@@ -25,8 +25,10 @@ PaginationContainer.propTypes = {
         ),
         PropTypes.object,
     ]),
+    customClassName: PropTypes.string
 };
 
 PaginationContainer.defaultProps = {
     children: [],
+    customClassName: ''
 };

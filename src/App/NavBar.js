@@ -5,22 +5,22 @@ import {
 
 /* Just a simple component not to polute the main App render */
 
-const NavBar = () => {
+const NavBar = ({ customClass }) => {
     return (
-        <nav className="navigation">
+        <nav className={customClass}>
             <ul className='sections'>
-                <li className="routeLink">
-                    <Link to={'/'}>
+                <li>
+                    <Link className="routeLink" to={'/'}>
                         Last Updated
                     </Link>
                 </li>
-                <li className="routeLink">
-                    <Link to={'/about'}>
+                <li>
+                    <Link className="routeLink" to={'/about'}>
                         About
                     </Link>
                 </li>
-                <li className="routeLink">
-                    <Link to={'/favourites'}>
+                <li>
+                    <Link className="routeLink" to={'/favourites'}>
                         Your Favorites
                     </Link>
                 </li>

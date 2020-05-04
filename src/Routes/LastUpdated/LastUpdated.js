@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-
 import API from '../../TechportApiUtil';
-import PaginationContainer from '../../Components/PaginationContainer'
+import { PaginationContainer } from '../../Components'
+import { themedScrollbar } from '../../Components'
 import TechportCard from '../../TechportCard';
+import styles from './styles';
+
 
 const LastUpdated = () => {
+    const classes = styles();
+    const scrollbar = themedScrollbar();
     const [lastWeekProjects, setLastWeekProjects] = useState();
 
     useEffect(() => {
@@ -19,13 +23,14 @@ const LastUpdated = () => {
         <div className="lastUpdated">
             {
                 lastWeekProjects && (
-                    <PaginationContainer>
+                    <PaginationContainer customClassName={`${classes.container} ${scrollbar.withThemedScrollbar}`}>
                         {
                             lastWeekProjects.map((singleProject, index) => {
                                 return <TechportCard
-                                    title={singleProject.title}
                                     key={index}
+                                    title={singleProject.title}
                                     paragraph={singleProject.description}
+                                    status={singleProject.status}
                                 />
                             })
                         }

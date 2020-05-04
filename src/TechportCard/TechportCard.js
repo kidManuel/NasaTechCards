@@ -1,17 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { Slices } from '../Components/Card';
-import styles from './styles'
 
-function TechportCard({ title, paragraph }) {
+import {
+    Card,
+    Slices,
+    StatusIndicator,
+    TechportTheme,
+    techportStatusColors,
+    SimpleOnOff
+} from '../Components';
+import styles from './styles';
+
+
+function TechportCard({ title, paragraph, status }) {
+    const classes = styles();
+    const themeClasses = TechportTheme();
+
+    const { modalContainer, textRead, title: themeTitle } = themeClasses;
+    const { base, title: titleClass, paragraph: paragraphClass, status: statusClass, bookmark } = classes;
+
     const { CardTitle, CardParagraph } = Slices;
-    const { techportCardTitle, techportCardParagraph, techportCardBase } = styles;
-    return (
-        <Card customStyle={techportCardBase}>
-            <CardTitle text={title} customStyle={techportCardTitle} />
-            <CardParagraph text={paragraph} customStyle={techportCardParagraph} />
-        </Card>
 
+    return (
+        <Card customClass={`${base} ${modalContainer}`}>
+            <StatusIndicator
+                label='status'
+                currentStatus={status}
+                customClass={statusClass}
+                statusTheme={techportStatusColors}
+            />
+            <SimpleOnOff
+                customClass={bookmark}
+            />
+            <CardTitle
+                text={title}
+                customClass={`${themeTitle} ${titleClass}`}
+                textClamp={{ lines: 2 }}
+            />
+            <CardParagraph text={paragraph}
+                customClass={`${textRead} ${paragraphClass}`}
+                textClamp={{ lines: 2 }}
+            />
+        </Card>
     );
 }
 

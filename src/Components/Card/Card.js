@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CardBase({ children, customStyle }) {
+function CardBase({ children, customClass }) {
     return (
-        <div className="CardBody" style={customStyle}>
+        <div className={`CardBody ${customClass}`}>
             {
-                children.map((slice, index) => <div key={index} className="CardComponent">{slice}</div>)
+                React.Children.map(children, (child) => child)
             }
         </div>
     );
