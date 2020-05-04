@@ -24,9 +24,10 @@ const LastUpdated = () => {
                         {
                             lastWeekProjects.map((singleProject, index) => {
                                 return <TechportCard
-                                    title={singleProject.title}
                                     key={index}
+                                    title={singleProject.title}
                                     paragraph={singleProject.description}
+                                    status={singleProject.status}
                                 />
                             })
                         }
