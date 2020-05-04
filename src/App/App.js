@@ -5,8 +5,9 @@ import {
     Route
 } from "react-router-dom";
 
-
 import Routes from '../Routes'
+import RouteMarker from '../RouteMarker'
+
 import NavBar from './NavBar'
 import styles from './styles';
 
@@ -30,6 +31,7 @@ function App() {
                         <About />
                     </Route>
                 </Switch>
+                <RouteMarker />
             </div>
 
         </Router>

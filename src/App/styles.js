@@ -25,7 +25,18 @@ const styles = createUseStyles({
             marginBottom: 20,
             transition: 'all 0.2s',
             color: colors.bgMain,
-            '&:hover': {
+            position: 'relative',
+            '&:hover:before': {
+                content: '""',
+                width: 60,
+                height: 60,
+                display: 'block',
+                position: 'absolute',
+                left: -90,
+                top: 0,
+                bottom: 0,
+                margin: 'auto',
+                backgroundImage: 'url("./media/arrow-hover.svg")',
             },
             '&:active,:visited': {
                 color: colors.bgSecondary,

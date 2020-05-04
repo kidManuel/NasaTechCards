@@ -46,20 +46,22 @@ const styles = createUseStyles({
         lineHeight: '25px',
         paddingLeft: 12,
         borderRadius: 25,
-        textTransform: 'uppercase',
 
         '& .statusPill': {
             display: 'inline-block',
             borderRadius: 18,
             padding: '0 15px',
             marginLeft: 25,
+            textTransform: 'capitalize',
 
             /* cute hack to get the alignment right */
             marginRight: -2,
         },
         '& .statusLabel': {
+            textTransform: 'uppercase',
             display: 'inline-block',
             fontSize: 11,
+            fontFamily: 'tussilago',
         }
     },
     bookmark: {
