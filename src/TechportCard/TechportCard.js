@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Card, { Slices } from '../Components/Card';
-import StatusIndicator from '../Components/StatusIndicator';
-import theme, { techportStatusColors } from '../Components/TechportTheme';
+import {
+    Card,
+    Slices,
+    StatusIndicator,
+    TechportTheme,
+    techportStatusColors,
+    SimpleOnOff
+} from '../Components';
 import styles from './styles';
 
 
 function TechportCard({ title, paragraph, status }) {
     const classes = styles();
-    const themeClasses = theme();
+    const themeClasses = TechportTheme();
 
     const { modalContainer, textRead, title: themeTitle } = themeClasses;
     const { base, title: titleClass, paragraph: paragraphClass, status: statusClass } = classes;
