@@ -6,6 +6,8 @@ const colors = {
     statusPositive: '#7ae592',
     statusMedium: '#ffd562',
     statusPasive: '#2eb7ff',
+    bgMainAlpha: 'rgba(18, 18, 18, 0.7)',
+    bgSecondaryAlpha: 'rgba(19, 19, 19, 0.5)'
 }
 
 export default colors;

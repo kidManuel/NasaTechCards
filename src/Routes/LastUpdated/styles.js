@@ -2,15 +2,14 @@ import { createUseStyles } from 'react-jss'
 
 const styles = createUseStyles({
     container: {
-        width: '65vw',
-        height: '90vh',
+        width: '55vw',
+        height: '76vh',
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        paddingTop: 25
-        /* overflowY: 'scroll' */
+        paddingTop: 25,
+        overflowY: 'scroll'
     }
-}
-)
+})
 
 export default styles;

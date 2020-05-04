@@ -6,11 +6,11 @@ const styles = createUseStyles({
         position: 'fixed',
         right: 0,
         bottom: 0,
-        width: '80vw',
+        width: '75vw',
         height: '90vh',
         zIndex: 0,
         backgroundColor: colors.bgContrast,
-        borderTopLeftRadius: 120
+        borderTopLeftRadius: 30
     },
     text: {
         position: 'absolute',

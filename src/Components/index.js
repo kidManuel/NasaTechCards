@@ -2,7 +2,7 @@ import Card, { Slices } from './Card';
 import PaginationContainer from './PaginationContainer';
 import SimpleOnOff from './SimpleOnOff';
 import StatusIndicator from './StatusIndicator';
-import TechportTheme, { techportStatusColors, colors } from './TechportTheme';
+import TechportTheme, { techportStatusColors, colors, themedScrollbar } from './TechportTheme';
 import TextClamp from './TextClamp';
 
 export {
@@ -14,5 +14,6 @@ export {
     TechportTheme,
     techportStatusColors,
     colors,
+    themedScrollbar,
     TextClamp,
 };

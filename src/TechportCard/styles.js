@@ -4,7 +4,7 @@ const styles = createUseStyles({
     base: {
         maxHeight: 415,
         maxWidth: 550,
-        width: '45%',
+        width: '47%',
         marginBottom: 25,
         '&:nth-child(odd)': {
             marginRight: 25
