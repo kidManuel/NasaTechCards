@@ -33,7 +33,6 @@ async function getExampleProject() {
 }
 
 function itemsToIds(items) {
-    console.log(items, 'iTEMS')
     if (!Array.isArray(items)) {
         console.error('You must provide an array of projects to be parsed')
         return null;
@@ -51,7 +50,6 @@ function itemsToIds(items) {
 
 async function getProjectsByDate(horizonDate) {
     const idsEndpoint = API_BASE + API_KEY + API_SEARCH_BY_DATE + horizonDate;
-    console.log(idsEndpoint);
     let projectIdsRaw = [];
     let projectsDataPromises = [];
     let projectsDataSolved = [];
