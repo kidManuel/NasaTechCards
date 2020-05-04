@@ -24,9 +24,7 @@ export default StatusIndicator;
 
 StatusIndicator.propTypes = {
     label: PropTypes.string,
-    initialStatus: PropTypes.string.isRequired,
+    currentStatus: PropTypes.string.isRequired,
     customClass: PropTypes.string,
-    statusTheme: PropTypes.arrayOf([
-        PropTypes.object
-    ])
+    statusTheme: PropTypes.object
 }

@@ -4,7 +4,6 @@ const {
     bgMain,
     highlight,
     statusPositive,
-    statusMedium,
     statusPasive,
 } = colors;
 

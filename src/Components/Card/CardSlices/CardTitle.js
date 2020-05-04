@@ -8,10 +8,10 @@ function CardTitle({ text, customClass, textClamp }) {
     }
 
     return (
-        <h2 className={`CardTitle ${customClass}`} >{
+        <div className={`CardTitle ${customClass}`} >{
             // ensure component degrades gracefully if a bad textClamp param is passed
             getText() || text
-        }</h2>
+        }</div>
     );
 }
 

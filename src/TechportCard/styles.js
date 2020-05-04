@@ -38,7 +38,6 @@ const styles = createUseStyles({
     status: {
         gridColumn: 'leftAligned / leftAligned',
         gridRow: 'header / header',
-        display: 'inline-block',
         border: 'solid 2px white',
         justifySelf: 'start',
         display: 'flex',
@@ -61,6 +60,21 @@ const styles = createUseStyles({
         '& .statusLabel': {
             display: 'inline-block',
             fontSize: 11,
+        }
+    },
+    bookmark: {
+        gridColumn: 'rightAligned / rightAligned',
+        gridRow: 'header / header',
+        width: 25,
+        height: 25,
+        backgroundImage: 'url("./media/bookmarkIcon.svg")',
+        backgroundSize: 'auto 100%',
+        cursor: 'pointer',
+        '&.true': {
+            backgroundPositionX: 25,
+        },
+        '&.false': {
+            backgroundPositionX: 0,
         }
     }
 });

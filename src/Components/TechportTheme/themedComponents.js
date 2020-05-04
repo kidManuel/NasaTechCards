@@ -2,20 +2,14 @@ import { createUseStyles } from 'react-jss';
 import colors from './colors';
 
 const {
-    bgMain,
     bgSecondary,
-    bgContrast,
-    highlight,
-    statusPositive,
-    statusMedium,
-    statusPasive,
 } = colors;
 
 
 const theme = createUseStyles({
     modalContainer: {
         borderRadius: 30,
-        boxShadow: '0 10px 40px 0 black',
+        boxShadow: '10px 10px 25px 0px rgba(0,0,0,0.7)',
         backgroundColor: bgSecondary,
         padding: 25,
         overflow: 'hidden',
@@ -28,7 +22,8 @@ const theme = createUseStyles({
         fontSize: 32,
         lineHeight: '30px',
         marginBottom: 20,
-        textTransform: 'uppercase'
+        textTransform: 'uppercase',
+        fontWeight: 700,
     },
     textRead: {
         textAlign: 'left',

@@ -17,15 +17,30 @@ function TechportCard({ title, paragraph, status }) {
     const themeClasses = TechportTheme();
 
     const { modalContainer, textRead, title: themeTitle } = themeClasses;
-    const { base, title: titleClass, paragraph: paragraphClass, status: statusClass } = classes;
+    const { base, title: titleClass, paragraph: paragraphClass, status: statusClass, bookmark } = classes;
 
     const { CardTitle, CardParagraph } = Slices;
 
     return (
         <Card customClass={`${base} ${modalContainer}`}>
-            <StatusIndicator label='status' currentStatus={status} customClass={statusClass} statusTheme={techportStatusColors} />
-            <CardTitle text={title} customClass={`${themeTitle} ${titleClass}`} textClamp={{ lines: 2 }} />
-            <CardParagraph text={paragraph} customClass={`${textRead} ${paragraphClass}`} textClamp={{ lines: 2 }} />
+            <StatusIndicator
+                label='status'
+                currentStatus={status}
+                customClass={statusClass}
+                statusTheme={techportStatusColors}
+            />
+            <SimpleOnOff
+                customClass={bookmark}
+            />
+            <CardTitle
+                text={title}
+                customClass={`${themeTitle} ${titleClass}`}
+                textClamp={{ lines: 2 }}
+            />
+            <CardParagraph text={paragraph}
+                customClass={`${textRead} ${paragraphClass}`}
+                textClamp={{ lines: 2 }}
+            />
         </Card>
     );
 }

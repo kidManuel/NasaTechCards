@@ -5,24 +5,27 @@ import {
     Route
 } from "react-router-dom";
 
+
 import Routes from '../Routes'
 import NavBar from './NavBar'
-import './App.css';
+import styles from './styles';
 
 
 function App() {
+    const classes = styles();
     const { About, LastUpdated } = Routes;
+    const { base, logo, navigation } = classes;
+
 
     return (
         <Router>
-
-            <div className="App">
-                <NavBar />
+            <div className={base}>
+                <img className={logo} alt='Techport Logo' src='./media/logo.svg' />
+                <NavBar customClass={navigation} />
                 <Switch>
                     <Route exact={true} path="/">
                         <LastUpdated />
                     </Route>
-
                     <Route exact={true} path="/about">
                         <About />
                     </Route>

@@ -8,10 +8,10 @@ function CardParagraph({ text, customClass, textClamp }) {
     }
 
     return (
-        <p className={`cardParagraph ${customClass}`}>{
+        <div className={`cardParagraph ${customClass}`}>{
             // ensure component degrades gracefully if a bad textClamp param is passed
             getText() || text
-        }</p>
+        }</div>
     );
 }
 
