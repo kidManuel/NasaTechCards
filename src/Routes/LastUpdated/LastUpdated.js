@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../TechportApiUtil';
-import { PaginationContainer, themedScrollbar } from '../../Components';
+import { PaginationContainer, TechportTheme } from '../../Components';
 import TechportCard from '../../TechportCard';
 import styles from './styles';
 
 
 const LastUpdated = () => {
     const classes = styles();
-    const scrollbar = themedScrollbar();
+    const theme = TechportTheme();
     const [lastWeekProjects, setLastWeekProjects] = useState();
 
     useEffect(() => {
@@ -22,25 +22,28 @@ const LastUpdated = () => {
         <div className="lastUpdated">
             {
                 lastWeekProjects && (
-                    <PaginationContainer itemsPerSlide={6} customClassName={`${classes.container} ${scrollbar.withThemedScrollbar}`}>
+                    <PaginationContainer
+                        itemsPerSlide={6}
+                        customClassName={`
+                            ${theme.pagination}
+                            ${classes.container}
+                        `}
+                    >
                         {
-                            lastWeekProjects.map((singleProject, index) => {
-                                return (
-                                    <TechportCard
-                                        key={index}
-                                        title={singleProject.title}
-                                        paragraph={singleProject.description}
-                                        projectStatus={singleProject.status}
-                                    />
-                                );
-                            })
+                            lastWeekProjects.map((singleProject, index) => (
+                                <TechportCard
+                                    key={index}
+                                    title={singleProject.title}
+                                    paragraph={singleProject.description}
+                                    projectStatus={singleProject.status}
+                                />
+                            ))
                         }
                     </PaginationContainer>
                 )
             }
         </div>
     );
-
 };
 
 export default LastUpdated;

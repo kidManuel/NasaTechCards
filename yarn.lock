@@ -6373,7 +6373,7 @@ jss-plugin-expand@10.1.1:
     "@babel/runtime" "^7.3.1"
     jss "10.1.1"
 
-jss-plugin-extend@10.1.1:
+jss-plugin-extend@10.1.1, jss-plugin-extend@^10.1.1:
   version "10.1.1"
   resolved "https://registry.yarnpkg.com/jss-plugin-extend/-/jss-plugin-extend-10.1.1.tgz#254999b7313055a127a9743480d32fb185de0c24"
   integrity sha512-dZl0hNsndP9GJM6yqA7lZmnx6KJHo/13Zeo5B3i2uaDNO9jd5Y3pp1XHURGfbFG3K29XsYBQPTgfBwQ7e7+nyA==

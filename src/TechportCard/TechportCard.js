@@ -7,7 +7,7 @@ import {
     StatusIndicator,
     TechportTheme,
     techportStatusColors,
-    SimpleOnOff
+    SimpleOnOff,
 } from '../Components';
 import styles from './styles';
 

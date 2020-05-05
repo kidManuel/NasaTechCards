@@ -7,7 +7,7 @@ const styles = createUseStyles({
         width: '47%',
         marginBottom: 25,
         '&:nth-child(odd)': {
-            marginRight: 25
+            marginRight: 25,
         },
         display: 'grid',
         gridTemplateColumns: '[leftAligned] auto [rightAligned] 25px',

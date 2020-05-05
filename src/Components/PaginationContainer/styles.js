@@ -1,6 +1,11 @@
 const styles = {
-    paginationContainer: {
-        overflow: 'hidden',
+    paginationContainerClass: {
+        '& .paginationSlides': {
+            overflow: 'hidden',
+        },
+        '& .paginationButton': {
+            cursor: 'pointer',
+        },
     },
 };
 

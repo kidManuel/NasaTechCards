@@ -4,12 +4,13 @@ const styles = createUseStyles({
     container: {
         width: '55vw',
         height: '76vh',
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
         paddingTop: 25,
-        overflowY: 'scroll'
-    }
-})
+        '& .paginationSlides': {
+            display: 'flex',
+            flexWrap: 'wrap',
+            flexDirection: 'row',
+        },
+    },
+});
 
 export default styles;
