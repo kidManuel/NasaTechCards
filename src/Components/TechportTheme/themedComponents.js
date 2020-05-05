@@ -23,6 +23,7 @@ const theme = createUseStyles({
         lineHeight: '30px',
         marginBottom: 20,
         textTransform: 'uppercase',
+        overflowWrap: 'break-word',
         fontWeight: 700,
     },
     textRead: {

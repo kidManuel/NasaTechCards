@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const mockData = [
     {
         "id": 90693,

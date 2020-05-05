@@ -20,9 +20,6 @@ const themedScrollbar = createUseStyles({
         '&::-webkit-scrollbar-thumb': {
             backgroundColor: bgMainAlpha,
             borderRadius: 6,
-        },
-        '&::-webkit-scrollbar': {
-            width: 11,
         }
     }
 })
