@@ -79,7 +79,9 @@ const theme = createUseStyles({
                         width: 25,
                         height: 25,
                         borderRadius: 25,
-                        border: `solid 1px ${bgMain}`,
+                        '&.active': {
+                            border: `solid 1px ${bgMain}`,
+                        },
                     },
                     '&.paginationMoveOne': {
                         width: 17,

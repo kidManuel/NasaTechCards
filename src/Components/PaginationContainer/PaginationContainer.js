@@ -45,19 +45,15 @@ class PaginationContainer extends Component {
 
     goToNext() {
         const { currentSlide, totalSlides } = this.state;
-        if (currentSlide < totalSlides) {
-            this.setState({
-                currentSlide: currentSlide + 1,
-            });
+        if (currentSlide + 1 < totalSlides) {
+            this.goToX(currentSlide + 1);
         }
     }
 
     goToPrev() {
         const { currentSlide } = this.state;
         if (currentSlide > 0) {
-            this.setState({
-                currentSlide: currentSlide - 1,
-            });
+            this.goToX(currentSlide - 1);
         }
     }
 
@@ -72,7 +68,7 @@ class PaginationContainer extends Component {
 
     render() {
         const { customClassName, classes } = this.props;
-        const { totalSlides } = this.state;
+        const { totalSlides, currentSlide } = this.state;
         const { paginationContainerClass } = classes;
 
         return (
@@ -89,6 +85,7 @@ class PaginationContainer extends Component {
                     prevCallback={this.goToPrev}
                     goToX={this.goToX}
                     label="page"
+                    currentSlide={currentSlide}
                 />
             </div>
         );

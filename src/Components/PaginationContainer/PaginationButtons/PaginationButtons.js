@@ -7,10 +7,11 @@ const PaginationButtons = ({
     nextCallback,
     goToX,
     label,
+    currentSlide,
 }) => {
     const NumberedPaginationButton = ({ id }) => (
         <button
-            className="paginationButton numberedPaginationButton"
+            className={`paginationButton numberedPaginationButton ${id === currentSlide ? 'active' : null}`}
             id={id}
             type="button"
             key={id}
@@ -55,6 +56,7 @@ PaginationButtons.propTypes = {
     nextCallback: PropTypes.func,
     goToX: PropTypes.func,
     label: PropTypes.string,
+    currentSlide: PropTypes.number.isRequired,
 };
 
 PaginationButtons.defaultProps = {
