@@ -1,9 +1,12 @@
-import { createUseStyles } from 'react-jss'
-
-const styles = createUseStyles({
-    paginationContainer: {
-        overflow: 'hidden'
+const styles = {
+    paginationContainerClass: {
+        '& .paginationSlides': {
+            overflow: 'hidden',
+        },
+        '& .paginationButton': {
+            cursor: 'pointer',
+        },
     },
-});
+};
 
 export default styles;

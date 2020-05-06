@@ -7,25 +7,31 @@ import {
     StatusIndicator,
     TechportTheme,
     techportStatusColors,
-    SimpleOnOff
+    SimpleOnOff,
 } from '../Components';
 import styles from './styles';
 
 
-function TechportCard({ title, paragraph, status }) {
+function TechportCard({ title, paragraph, projectStatus }) {
     const classes = styles();
     const themeClasses = TechportTheme();
 
     const { modalContainer, textRead, title: themeTitle } = themeClasses;
-    const { base, title: titleClass, paragraph: paragraphClass, status: statusClass, bookmark } = classes;
+    const {
+        base,
+        title: titleClass,
+        paragraph: paragraphClass,
+        status: statusClass,
+        bookmark,
+    } = classes;
 
     const { CardTitle, CardParagraph } = Slices;
 
     return (
         <Card customClass={`${base} ${modalContainer}`}>
             <StatusIndicator
-                label='status'
-                currentStatus={status}
+                label="status"
+                currentStatus={projectStatus}
                 customClass={statusClass}
                 statusTheme={techportStatusColors}
             />
@@ -37,7 +43,8 @@ function TechportCard({ title, paragraph, status }) {
                 customClass={`${themeTitle} ${titleClass}`}
                 textClamp={{ lines: 2 }}
             />
-            <CardParagraph text={paragraph}
+            <CardParagraph
+                text={paragraph}
                 customClass={`${textRead} ${paragraphClass}`}
                 textClamp={{ lines: 2 }}
             />
@@ -50,9 +57,11 @@ export default TechportCard;
 TechportCard.propTypes = {
     title: PropTypes.string,
     paragraph: PropTypes.string,
+    projectStatus: PropTypes.string,
 };
 
 TechportCard.defaultProps = {
     title: '',
     paragraph: '',
+    projectStatus: '',
 };

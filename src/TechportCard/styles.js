@@ -7,7 +7,7 @@ const styles = createUseStyles({
         width: '47%',
         marginBottom: 25,
         '&:nth-child(odd)': {
-            marginRight: 25
+            marginRight: 25,
         },
         display: 'grid',
         gridTemplateColumns: '[leftAligned] auto [rightAligned] 25px',
@@ -16,13 +16,12 @@ const styles = createUseStyles({
     title: {
         gridColumn: 'leftAligned / leftAligned',
         gridRow: 'title / title',
-        alignSelf: 'start',
+        alignSelf: 'end',
 
         margin: {
             top: 45,
             left: 25,
         },
-        maxHeight: 135,
         overflow: 'hidden',
     },
     paragraph: {
@@ -33,7 +32,7 @@ const styles = createUseStyles({
         textAlign: 'left',
         maxHeight: 50,
         overflow: 'hidden',
-        marginLeft: 25
+        marginLeft: 25,
     },
     status: {
         gridColumn: 'leftAligned / leftAligned',
@@ -62,7 +61,7 @@ const styles = createUseStyles({
             display: 'inline-block',
             fontSize: 11,
             fontFamily: 'tussilago',
-        }
+        },
     },
     bookmark: {
         gridColumn: 'rightAligned / rightAligned',
@@ -77,8 +76,8 @@ const styles = createUseStyles({
         },
         '&.false': {
             backgroundPositionX: 0,
-        }
-    }
+        },
+    },
 });
 
 export default styles;

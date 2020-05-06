@@ -19,7 +19,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "ignorePatterns": ["serviceWorker.js"],
     "rules": {
@@ -35,5 +36,7 @@
         "no-console": "off",
         "react/no-array-index-key": "off",
         "no-plusplus": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 }
