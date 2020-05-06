@@ -1,7 +1,6 @@
-import { createUseStyles } from 'react-jss';
 import { colors } from '../Components';
 
-const styles = createUseStyles({
+const styles = {
     base: {
         position: 'relative',
         width: '88vw',
@@ -46,9 +45,9 @@ const styles = createUseStyles({
             '&.active': {
                 fontWeight: 700,
                 color: colors.highlight,
-            }
-        }
-    }
-});
+            },
+        },
+    },
+};
 
 export default styles;

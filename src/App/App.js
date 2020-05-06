@@ -1,41 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route
-} from "react-router-dom";
+    Route,
+} from 'react-router-dom';
+import injectSheet from 'react-jss';
 
-import Routes from '../Routes'
-import RouteMarker from '../RouteMarker'
+import Routes from '../Routes';
+import RouteMarker from '../RouteMarker';
 
-import NavBar from './NavBar'
+import NavBar from './NavBar';
 import styles from './styles';
 
 
-function App() {
-    const classes = styles();
-    const { About, LastUpdated } = Routes;
-    const { base, logo, navigation } = classes;
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            memo: {},
+            favorited: [],
+            selected: [],
+            currentPage: '',
+        };
+    }
 
-
-    return (
-        <Router>
-            <div className={base}>
-                <img className={logo} alt='Techport Logo' src='./media/logo.svg' />
-                <NavBar customClass={navigation} />
-                <Switch>
-                    <Route exact={true} path="/">
-                        <LastUpdated />
-                    </Route>
-                    <Route exact={true} path="/about">
-                        <About />
-                    </Route>
-                </Switch>
-                <RouteMarker />
-            </div>
-
-        </Router>
-    );
+    render() {
+        const { About, LastUpdated } = Routes;
+        const { classes } = this.props;
+        const { base, logo, navigation } = classes;
+        return (
+            <Router>
+                <div className={base}>
+                    <img className={logo} alt="Techport Logo" src="./media/logo.svg" />
+                    <NavBar customClass={navigation} />
+                    <Switch>
+                        <Route exact path="/">
+                            <LastUpdated />
+                        </Route>
+                        <Route exact path="/about">
+                            <About />
+                        </Route>
+                    </Switch>
+                    <RouteMarker />
+                </div>
+            </Router>
+        );
+    }
 }
 
-export default App;
+export default injectSheet(styles)(App);
