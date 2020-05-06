@@ -19,6 +19,7 @@ const styles = createUseStyles({
     navigation: {
         order: 1,
         textAlign: 'right',
+        pointerEvents: 'none',
         '& .routeLink': {
             textDecoration: 'none',
             fontSize: 60,
@@ -26,6 +27,7 @@ const styles = createUseStyles({
             transition: 'all 0.2s',
             color: colors.bgMain,
             position: 'relative',
+            pointerEvents: 'auto',
             '&:hover:before': {
                 content: '""',
                 width: 60,
