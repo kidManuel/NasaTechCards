@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import {
     Card,
@@ -13,6 +14,7 @@ import styles from './styles';
 
 
 function TechportCard({ title, paragraph, projectStatus }) {
+    const { CardTitle, CardParagraph, ViewMore } = Slices;
     const classes = styles();
     const themeClasses = TechportTheme();
 
@@ -23,9 +25,16 @@ function TechportCard({ title, paragraph, projectStatus }) {
         paragraph: paragraphClass,
         status: statusClass,
         bookmark,
+        viewMore
     } = classes;
 
-    const { CardTitle, CardParagraph } = Slices;
+
+    const getViewMoreButton = () => (
+        <Link to="/card/:cardId" className="anchor">
+            <div className="viewMoreButton">+</div>
+        </Link>
+    );
+
 
     return (
         <Card customClass={`${base} ${modalContainer}`}>
@@ -47,6 +56,11 @@ function TechportCard({ title, paragraph, projectStatus }) {
                 text={paragraph}
                 customClass={`${textRead} ${paragraphClass}`}
                 textClamp={{ lines: 2 }}
+            />
+            <ViewMore
+                label="More"
+                button={getViewMoreButton()}
+                customClass={viewMore}
             />
         </Card>
     );

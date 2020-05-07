@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss'
+import { colors } from '../Components';
 
 const styles = createUseStyles({
     base: {
@@ -10,11 +11,11 @@ const styles = createUseStyles({
             marginRight: 25,
         },
         display: 'grid',
-        gridTemplateColumns: '[leftAligned] auto [rightAligned] 25px',
-        gridTemplateRows: '[header] 25px [title] auto [padding] 25px [textShort] 50px [footer] 50px',
+        gridTemplateColumns: '[leftAligned] auto [rightAligned] auto',
+        gridTemplateRows: '[header] 25px [title] auto [padding] 25px [textShort] 50px [footer] 95px',
     },
     title: {
-        gridColumn: 'leftAligned / leftAligned',
+        gridColumn: 'leftAligned / span 2',
         gridRow: 'title / title',
         alignSelf: 'end',
 
@@ -25,7 +26,7 @@ const styles = createUseStyles({
         overflow: 'hidden',
     },
     paragraph: {
-        gridColumn: 'leftAligned / leftAligned',
+        gridColumn: 'leftAligned / span 2',
         gridRow: 'textShort / textShort',
         alignSelf: 'start',
 
@@ -33,6 +34,7 @@ const styles = createUseStyles({
         maxHeight: 50,
         overflow: 'hidden',
         marginLeft: 25,
+        marginBottom: 45,
     },
     status: {
         gridColumn: 'leftAligned / leftAligned',
@@ -71,11 +73,46 @@ const styles = createUseStyles({
         backgroundImage: 'url("./media/bookmarkIcon.svg")',
         backgroundSize: 'auto 100%',
         cursor: 'pointer',
+        justifySelf: 'end',
         '&.true': {
             backgroundPositionX: 25,
         },
         '&.false': {
             backgroundPositionX: 0,
+        },
+    },
+    viewMore: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gridColumn: 'rightAligned / rightAligned',
+        gridRow: 'footer / footer',
+        justifySelf: 'end',
+        alignSelf: 'end',
+
+        '& .viewMoreLabel': {
+            textTransform: 'uppercase',
+            fontFamily: 'tussilago',
+            fontSize: 11,
+            marginRight: 15,
+        },
+        '& .anchor': {
+            textDecoration: 'none',
+            '& .viewMoreButton': {
+                width: 50,
+                height: 50,
+                border: 'solid 1px white',
+                borderRadius: 25,
+                fontSize: 30,
+                lineHeight: '40px',
+                color: 'white',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                '&:hover': {
+                    backgroundColor: colors.highlight,
+                    border: 'solid 1px transparent',
+                },
+            },
         },
     },
 });
