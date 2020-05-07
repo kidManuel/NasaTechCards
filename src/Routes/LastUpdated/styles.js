@@ -3,13 +3,8 @@ import { createUseStyles } from 'react-jss'
 const styles = createUseStyles({
     container: {
         width: '55vw',
-        height: '76vh',
+        height: '80vh',
         paddingTop: 25,
-        '& .paginationSlides': {
-            display: 'flex',
-            flexWrap: 'wrap',
-            flexDirection: 'row',
-        },
     },
 });
 

@@ -60,13 +60,17 @@ class App extends Component {
     render() {
         const { About, LastUpdated } = Routes;
         const { classes } = this.props;
-        const { base, logo, navigation } = classes;
+        const {
+            base, logo, navigation, header,
+        } = classes;
         const { defaultContent, isLoading } = this.state;
 
         return (
             <Router>
                 <div className={base}>
-                    <img className={logo} alt="Techport Logo" src="./media/logo.svg" />
+                    <header className={header}>
+                        <img className={logo} alt="Techport Logo" src="./media/logo.svg" />
+                    </header>
                     <NavBar customClass={navigation} />
                     <Switch>
                         <Route exact path="/">
@@ -92,5 +96,6 @@ App.propTypes = {
         base: PropTypes.string,
         logo: PropTypes.string,
         navigation: PropTypes.string,
+        header: PropTypes.string,
     }).isRequired,
 };

@@ -12,12 +12,15 @@ const {
 const theme = createUseStyles({
     modalContainer: {
         borderRadius: 30,
-        boxShadow: '10px 10px 25px 0px rgba(0,0,0,0.7)',
         backgroundColor: bgSecondary,
         padding: 25,
         overflow: 'hidden',
         color: 'white',
         boxSizing: 'border-box',
+        transition: 'all 0.3s',
+        '&:hover': {
+            boxShadow: '10px 10px 10px 0px rgba(0,0,0,0.6)',
+        },
     },
     title: {
         fontFamily: 'tussilago',
@@ -38,11 +41,11 @@ const theme = createUseStyles({
     pagination: {
         '& .paginationSlides': {
             extend: themedScrollbar.withThemedScrollbar,
-            height: '100%',
+            paddingTop: 10,
         },
         '& .paginationButtonsTrack': {
             position: 'absolute',
-            left: '105%',
+            right: 0,
             bottom: 0,
             background: bgMain,
             color: 'white',
