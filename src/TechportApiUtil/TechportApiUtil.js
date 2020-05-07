@@ -1,5 +1,5 @@
-import constants from './const';
 import moment from 'moment';
+import constants from './const';
 import mockData from './mock-data';
 
 const {
@@ -38,71 +38,79 @@ function itemsToIds(items) {
         return null;
     }
 
-    let ids = [];
+    const ids = [];
 
     /* Can't believe the api has no offset ammount of items */
-    for (let c = 0; c < CURRENT_MAX_ITEMS; c++) {
-        ids.push(Number(items[c].id));
+    if (CURRENT_MAX_ITEMS) {
+        for (let c = 0; c < CURRENT_MAX_ITEMS; c++) {
+            ids.push(Number(items[c].id));
+        }
     }
 
     return ids;
 }
 
-async function getProjectsByDate(horizonDate) {
-    const idsEndpoint = API_BASE + API_KEY + API_SEARCH_BY_DATE + horizonDate;
+function getSingleProject(projectId) {
+    const projectEndpoint = `${API_BASE}/${projectId}${API_KEY}`;
+    return fetch(projectEndpoint)
+        .then(
+            (response) => response.json(),
+        ).then(
+            (response) => response.project,
+        );
+}
+
+async function getProjectsByDate(horizonDate, memo) {
+    const idsEndpoint = `${API_BASE}${API_KEY}${API_SEARCH_BY_DATE}${horizonDate}`;
+    const projectsDataPromises = [];
     let projectIdsRaw = [];
-    let projectsDataPromises = [];
     let projectsDataSolved = [];
 
     await fetch(idsEndpoint)
         .then(
-            response => response.json()
+            (response) => response.json(),
         ).then(
             (rawProjects) => {
                 projectIdsRaw = itemsToIds(rawProjects.projects.projects);
-            }
+            },
         ).catch(
             (error) => {
-                console.error(`Something went terribly wrong. Here's the error message if you want it ${error} `)
-            }
-        )
-
+                console.error(`Something went terribly wrong. Here's the error message if you want it ${error} `);
+            },
+        );
 
 
     projectIdsRaw.forEach((singleProject) => {
-        const projectEndpoint = API_BASE + '/' + singleProject + API_KEY;
         projectsDataPromises.push(
-            fetch(projectEndpoint)
-                .then(
-                    response => response.json()
-                ).then(
-                    response => response.project
-                )
-        )
-    })
+            memo[singleProject] || getSingleProject(singleProject),
+        );
+    });
 
     await Promise.all(projectsDataPromises).then(
-        (results) => projectsDataSolved = results
-    )
+        (results) => {
+            projectsDataSolved = results;
+        },
+    );
 
     return projectsDataSolved;
 }
 
-async function getProjectsUpdatedLastWeek() {
+
+async function getProjectsUpdatedLastWeek(memo) {
     if (useMockData) {
         return mockData;
-    } else {
-        // not even going to pretend like im going to get the string for one week ago by hand. 
-        const oneWeekAgo = moment().subtract(1, 'week').format('YYYY-MM-DD');
-        let projectsUpdatedLastWeek = getProjectsByDate(oneWeekAgo);
-
-        await projectsUpdatedLastWeek;
-        return projectsUpdatedLastWeek;
     }
+
+    // not even going to pretend like im going to get the string for one week ago by hand.
+    const oneWeekAgo = moment().subtract(1, 'week').format('YYYY-MM-DD');
+    const projectsUpdatedLastWeek = getProjectsByDate(oneWeekAgo, memo);
+
+    await projectsUpdatedLastWeek;
+    return projectsUpdatedLastWeek;
 }
 
 export {
     getExampleProject,
     getProjectsByDate,
-    getProjectsUpdatedLastWeek
+    getProjectsUpdatedLastWeek,
 };

@@ -100,7 +100,7 @@ PaginationContainer.propTypes = {
     itemsPerSlide: PropTypes.number.isRequired,
     customClassName: PropTypes.string,
     classes: PropTypes.shape({
-        paginationContainerClass: PropTypes.object,
+        paginationContainerClass: PropTypes.string,
     }).isRequired,
     children: PropTypes.arrayOf(
         PropTypes.object,
