@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
     BrowserRouter as Router,
     Switch,
@@ -85,3 +86,11 @@ class App extends Component {
 }
 
 export default injectSheet(styles)(App);
+
+App.propTypes = {
+    classes: PropTypes.shape({
+        base: PropTypes.string,
+        logo: PropTypes.string,
+        navigation: PropTypes.string,
+    }).isRequired,
+};
