@@ -5,15 +5,17 @@ const styles = {
         position: 'relative',
         width: '88vw',
         margin: '0 auto',
-        paddingTop: 200,
+        paddingTop: '7vh',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+    },
+    header: {
+        flexBasis: '100%',
     },
     logo: {
-        position: 'fixed',
-        top: 75,
-        left: '6vw',
+        width: '15vw',
     },
     navigation: {
         order: 1,

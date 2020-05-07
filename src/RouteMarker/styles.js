@@ -7,10 +7,10 @@ const styles = createUseStyles({
         right: 0,
         bottom: 0,
         width: '75vw',
-        height: '90vh',
+        height: '93vh',
         zIndex: 0,
         backgroundColor: colors.bgContrast,
-        borderTopLeftRadius: 30
+        borderTopLeftRadius: 30,
     },
     text: {
         position: 'absolute',
