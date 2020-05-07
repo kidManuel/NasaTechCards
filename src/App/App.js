@@ -5,6 +5,7 @@ import {
     Route,
 } from 'react-router-dom';
 import injectSheet from 'react-jss';
+import API from '../TechportApiUtil';
 
 import Routes from '../Routes';
 import RouteMarker from '../RouteMarker';
@@ -21,13 +22,46 @@ class App extends Component {
             favorited: [],
             selected: [],
             currentPage: '',
+            defaultContent: [],
+            isLoading: true
         };
+        this.dataMemoization = this.dataMemoization.bind(this);
     }
+
+    componentDidMount() {
+        const { memo } = this.state;
+        API.getProjectsUpdatedLastWeek(memo).then((newDefaultContent) => {
+            this.setState({
+                memo: this.dataMemoization(newDefaultContent),
+                defaultContent: newDefaultContent,
+                isLoading: false,
+            });
+        });
+    }
+
+    dataMemoization(data) {
+        // Some entries in the data could potentially be lost
+        // due to shallow cloning.
+        // Potential solution is using external libraries
+        // such as lodash.cloneDeep
+        const { memo } = this.state;
+        const newMemo = { ...memo };
+        data.forEach((singleProject) => {
+            const { id } = singleProject;
+            if (!newMemo[id]) {
+                newMemo[id] = singleProject;
+            }
+        });
+        return newMemo;
+    }
+
 
     render() {
         const { About, LastUpdated } = Routes;
         const { classes } = this.props;
         const { base, logo, navigation } = classes;
+        const { defaultContent, isLoading } = this.state;
+
         return (
             <Router>
                 <div className={base}>
@@ -35,7 +69,9 @@ class App extends Component {
                     <NavBar customClass={navigation} />
                     <Switch>
                         <Route exact path="/">
-                            <LastUpdated />
+                            {
+                                (!isLoading) && <LastUpdated content={defaultContent} />
+                            }
                         </Route>
                         <Route exact path="/about">
                             <About />

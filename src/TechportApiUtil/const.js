@@ -9,7 +9,7 @@ const constants = {
     API_KEY,
     API_SEARCH_BY_DATE,
     EXAMPLE_PROJECT,
-    CURRENT_MAX_ITEMS
+    CURRENT_MAX_ITEMS,
 };
 
 export default constants;
