@@ -9,7 +9,6 @@ import Paragraph from './Paragraph';
 import Title from './Title';
 import LabeledButton from './LabeledButton';
 
-
 export {
     Card,
     PaginationContainer,
