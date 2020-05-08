@@ -19,7 +19,7 @@ const LabeledData = ({ data, customClass }) => {
                                             {
                                                 currentKey.map((currentValue) => {
                                                     return <li>
-                                                        <h4 className="labeledDataValue">{currentValue}</h4>
+                                                        <h4 className="labeledDataValue">{`- ${currentValue}`}</h4>
                                                     </li>
                                                 })
                                             }

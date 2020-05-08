@@ -20,6 +20,7 @@ const styles = createUseStyles({
         borderBottomLeftRadius: 0,
         display: 'grid',
         gridTemplateColumns: '[leftAligned] min-content [mainBody] 50% [rightAligned] auto',
+        position: 'relative'
     },
     status: {
         gridColumn: 'leftAligned / leftAligned',
@@ -43,16 +44,26 @@ const styles = createUseStyles({
     },
     labeledData: {
         marginLeft: 100,
-        marginTop: 100,
         gridColumn: 'rightAligned / rightAligned',
         '& .labeledDataEntry': {
-            marginBottom: 50,
+            marginBottom: 40,
         }
     },
     viewLess: {
         gridColumn: 'rightAligned / rightAligned',
         justifySelf: 'end',
         alignSelf: 'end',
+    },
+    acroHighlight: {
+        position: 'fixed',
+        transform: 'rotateZ(-10deg)',
+        top: '30%',
+        left: '10%',
+    },
+    bookmark: {
+        position: 'absolute',
+        top: '7vh',
+        right: 25,
     }
 });
 

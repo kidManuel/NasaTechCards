@@ -34,6 +34,7 @@ function TechportCard({ cardData }) {
         status: themedStatus,
         labeledData,
         labeledButton,
+        bookmark: themedBookmark,
     } = themeClasses;
 
     const {
@@ -72,7 +73,7 @@ function TechportCard({ cardData }) {
                 statusTheme={techportStatusColors}
             />
             <SimpleOnOff
-                customClass={bookmark}
+                customClass={`${themedBookmark} ${bookmark}`}
             />
             <CardTitle
                 text={title}

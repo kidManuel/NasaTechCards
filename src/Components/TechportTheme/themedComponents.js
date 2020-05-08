@@ -23,7 +23,7 @@ const theme = createUseStyles({
         fontFamily: 'tussilago',
         color: 'white',
         fontSize: 32,
-        lineHeight: '30px',
+        lineHeight: '32px',
         marginBottom: 20,
         textTransform: 'uppercase',
         overflowWrap: 'break-word',
@@ -60,6 +60,20 @@ const theme = createUseStyles({
             display: 'inline-block',
             fontSize: 11,
             fontFamily: 'tussilago',
+        },
+    },
+    bookmark: {
+        width: 25,
+        height: 25,
+        backgroundImage: 'url("/media/bookmarkIcon.svg")',
+        backgroundSize: 'auto 100%',
+        cursor: 'pointer',
+        justifySelf: 'end',
+        '&.true': {
+            backgroundPositionX: 25,
+        },
+        '&.false': {
+            backgroundPositionX: 0,
         },
     },
     pagination: {
@@ -168,6 +182,15 @@ const theme = createUseStyles({
                 },
             },
         },
+    },
+    superHighlight: {
+        fontSize: 100,
+        fontWeight: 700,
+        color: bgMain,
+        border: `solid 15px ${bgMain}`,
+        textAlign: 'center',
+        borderRadius: 100,
+        padding: '25px 100px'
     }
 });
 

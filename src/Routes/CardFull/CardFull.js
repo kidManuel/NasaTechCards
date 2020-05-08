@@ -28,7 +28,9 @@ const CardFull = ({ data }) => {
         paragraph: paragraphClass,
         bodyContent,
         labeledData: fullInfo,
-        viewLess
+        viewLess,
+        acroHighlight,
+        bookmark,
     } = classes;
 
     const {
@@ -38,6 +40,8 @@ const CardFull = ({ data }) => {
         status: themedStatus,
         labeledData,
         labeledButton,
+        superHighlight,
+        bookmark: themedBookmark,
     } = theme;
 
     const {
@@ -76,12 +80,20 @@ const CardFull = ({ data }) => {
     return (
         <div className={overlayWrapper}>
             <Card customClass={`${cardFullContainer} ${modalContainer}`}>
+                <SimpleOnOff
+                    customClass={`${themedBookmark} ${bookmark}`}
+                />
                 <StatusIndicator
                     label="status"
                     currentStatus={status}
                     customClass={`${themedStatus} ${statusClass}`}
                     statusTheme={techportStatusColors}
                 />
+
+                {
+                    acronym ? <div className={`${superHighlight} ${acroHighlight}`}><h1 >{acronym}</h1></div> : null
+                }
+
                 <div className={bodyContent}>
                     <CardTitle
                         text={title}
@@ -89,7 +101,7 @@ const CardFull = ({ data }) => {
                     />
                     <CardParagraph
                         text={description}
-                        customClass={`${textRead} ${paragraphClass} `}
+                        customClass={`${textRead} ${paragraphClass}`}
                     />
                     <CardTitle
                         text="Benefits"
@@ -97,12 +109,12 @@ const CardFull = ({ data }) => {
                     />
                     <CardParagraph
                         text={benefits}
-                        customClass={`${textRead} ${paragraphClass} `}
+                        customClass={`${textRead} ${paragraphClass}`}
                     />
                 </div>
                 <LabeledData
                     data={getLabeledData()}
-                    customClass={`${labeledData} ${fullInfo} `}
+                    customClass={`${labeledData} ${fullInfo}`}
                 />
                 <LabeledButton
                     label="Less"

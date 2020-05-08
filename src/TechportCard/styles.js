@@ -41,18 +41,6 @@ const styles = createUseStyles({
     bookmark: {
         gridColumn: 'rightAligned / rightAligned',
         gridRow: 'header / header',
-        width: 25,
-        height: 25,
-        backgroundImage: 'url("./media/bookmarkIcon.svg")',
-        backgroundSize: 'auto 100%',
-        cursor: 'pointer',
-        justifySelf: 'end',
-        '&.true': {
-            backgroundPositionX: 25,
-        },
-        '&.false': {
-            backgroundPositionX: 0,
-        },
     },
     projectDates: {
         gridColumn: 'leftAligned / leftAligned',
