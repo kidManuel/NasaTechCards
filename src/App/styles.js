@@ -12,12 +12,51 @@ const styles = {
     },
     header: {
         height: '9vh',
-        marginBottom: '4vh'
+        marginBottom: '4vh',
+        width: '55vw',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'end',
     },
     logo: {
         height: '100%',
         position: 'relative',
         zIndex: 3,
+    },
+    actions: {
+        flex: '0 0 auto',
+        backgroundColor: colors.bgSecondary,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '15px 25px',
+        borderRadius: 50,
+        '& .actionsLabel': {
+            color: colors.bgContrast,
+            fontFamily: 'tussilago',
+            fontSize: 15,
+            fontWeight: 700,
+            marginRight: 10,
+        },
+        '& .actionButton': {
+            width: 30,
+            height: 30,
+            backgroundRepeat: 'no-repeat',
+            margin: '0 15px',
+            cursor: 'pointer',
+            position: 'relative',
+            top: 0,
+            transition: 'all 0.3s',
+            '&:hover': {
+                top: -5,
+            },
+            '&.delete': {
+                backgroundImage: 'url("/media/delete.svg")',
+            },
+            '&.bookmark': {
+                backgroundImage: 'url("/media/bookmark.svg")',
+            }
+        }
     },
     bodyContent: {
         gridRow: 'body / body',
@@ -50,7 +89,7 @@ const styles = {
                 top: 0,
                 bottom: 0,
                 margin: 'auto',
-                backgroundImage: 'url("./media/arrow-hover.svg")',
+                backgroundImage: 'url("/media/arrow-hover.svg")',
             },
             '&:active,:visited': {
                 color: colors.bgSecondary,

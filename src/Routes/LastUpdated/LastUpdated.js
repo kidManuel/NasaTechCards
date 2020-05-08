@@ -6,7 +6,7 @@ import TechportCard from '../../TechportCard';
 import styles from './styles';
 
 
-const LastUpdated = ({ content, customClass, enterCallback }) => {
+const LastUpdated = ({ content, customClass, enterCallback, itemSelection }) => {
     const classes = styles();
     const theme = TechportTheme();
 
@@ -28,6 +28,7 @@ const LastUpdated = ({ content, customClass, enterCallback }) => {
                         <TechportCard
                             cardData={singleProject}
                             key={singleProject.id}
+                            toggleSelectedCallback={itemSelection}
                         />
                     ))
                 }

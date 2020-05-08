@@ -36,7 +36,7 @@ const styles = createUseStyles({
         marginLeft: 25,
         marginBottom: 45,
     },
-    bookmark: {
+    select: {
         gridColumn: 'rightAligned / rightAligned',
         gridRow: 'header / header',
     },

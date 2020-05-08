@@ -1,6 +1,7 @@
 const colors = {
     bgMain: '#121212',
     bgSecondary: '#1d1d1d',
+    bgTertiary: '#303030',
     bgContrast: '#dedede',
     highlight: '#e60d2e',
     statusPositive: '#7ae592',

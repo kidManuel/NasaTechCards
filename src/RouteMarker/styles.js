@@ -24,6 +24,14 @@ const styles = createUseStyles({
                 top: '40%',
                 transform: 'rotateZ(-90deg)',
             }
+        },
+        '&.Favorites': {
+            height: '100vh',
+            width: '100vw',
+            '& $text': {
+                bottom: '5%',
+                right: '10%',
+            }
         }
     },
     text: {
