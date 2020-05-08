@@ -14,8 +14,7 @@ const useMockData = true;
 
 function itemsToIds(items) {
     if (!Array.isArray(items)) {
-        console.error('You must provide an array of projects to be parsed')
-        return null;
+        throw new Error('You must provide an array of projects to be parsed')
     }
 
     const ids = [];
@@ -35,14 +34,12 @@ async function getSingleProject(projectId, memo) {
     let data;
 
     if (memo[projectId]) {
-        console.log('return memo');
         return memo[projectId];
     }
 
     if (useMockData) {
         data = mockData.find((element) => element.id === Number(projectId));
 
-        console.log(data, 'return mock data');
         return data;
     }
 
@@ -73,7 +70,7 @@ async function getProjectsByDate(horizonDate, memo) {
             },
         ).catch(
             (error) => {
-                console.error(`Something went terribly wrong. Here's the error message if you want it ${error} `);
+                throw new Error(`Something went terribly wrong. Here's the error message if you want it ${error} `);
             },
         );
 

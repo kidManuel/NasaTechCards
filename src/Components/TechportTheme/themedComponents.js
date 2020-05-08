@@ -18,9 +18,6 @@ const theme = createUseStyles({
         color: 'white',
         boxSizing: 'border-box',
         transition: 'all 0.3s',
-        '&:hover': {
-            boxShadow: '10px 10px 10px 0px rgba(0,0,0,0.6)',
-        },
     },
     title: {
         fontFamily: 'tussilago',
@@ -67,7 +64,7 @@ const theme = createUseStyles({
     },
     pagination: {
         '& .paginationSlides': {
-            extend: themedScrollbar.withThemedScrollbar,
+            extend: themedScrollbar,
             paddingTop: 10,
         },
         '& .paginationButtonsTrack': {
@@ -129,15 +126,48 @@ const theme = createUseStyles({
         },
     },
     labeledData: {
-        display: 'flex',
-        flexDirection: 'column',
-        '& .labeledDataLabel': {
-            fontSize: 12,
+        '& .labeledDataEntry': {
+            display: 'flex',
+            flexDirection: 'column',
+            '& .labeledDataLabel': {
+                fontSize: 12,
+                order: 2,
+            },
+            '& .labeledDataValue': {
+                fontSize: 20,
+                order: 1,
+            },
         },
-        '& .labeledDataValue': {
-            fontSize: 20,
-        }
+    },
+    labeledButton: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
 
+        '& .labeledButtonLabel': {
+            textTransform: 'uppercase',
+            fontFamily: 'tussilago',
+            fontSize: 11,
+            marginRight: 15,
+        },
+        '& .anchor': {
+            textDecoration: 'none',
+            '& .labeledButton': {
+                width: 50,
+                height: 50,
+                border: 'solid 1px white',
+                borderRadius: 25,
+                fontSize: 30,
+                lineHeight: '40px',
+                color: 'white',
+                textAlign: 'center',
+                transition: 'all 0.3s',
+                '&:hover': {
+                    backgroundColor: colors.highlight,
+                    border: 'solid 1px transparent',
+                },
+            },
+        },
     }
 });
 

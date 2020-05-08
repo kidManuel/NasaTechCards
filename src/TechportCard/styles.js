@@ -13,12 +13,14 @@ const styles = createUseStyles({
         display: 'grid',
         gridTemplateColumns: '[leftAligned] auto [rightAligned] auto',
         gridTemplateRows: '[header] 25px [title] auto [padding] 25px [textShort] 50px [footer] 95px',
+        '&:hover': {
+            boxShadow: '10px 10px 10px 0px rgba(0,0,0,0.6)',
+        },
     },
     title: {
         gridColumn: 'leftAligned / span 2',
         gridRow: 'title / title',
         alignSelf: 'end',
-
         margin: {
             top: 45,
             left: 25,
@@ -62,50 +64,14 @@ const styles = createUseStyles({
         alignSelf: 'end',
         marginLeft: 25,
         '& .labeledDataEntry': {
-            display: 'flex',
-            flexDirection: 'column',
             marginRight: 25,
-            '& .labeledDataValue': {
-                order: 1,
-            },
-            '& .labeledDataLabel': {
-                order: 2,
-            },
         },
     },
     viewMore: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
         gridColumn: 'rightAligned / rightAligned',
         gridRow: 'footer / footer',
         justifySelf: 'end',
         alignSelf: 'end',
-
-        '& .viewMoreLabel': {
-            textTransform: 'uppercase',
-            fontFamily: 'tussilago',
-            fontSize: 11,
-            marginRight: 15,
-        },
-        '& .anchor': {
-            textDecoration: 'none',
-            '& .viewMoreButton': {
-                width: 50,
-                height: 50,
-                border: 'solid 1px white',
-                borderRadius: 25,
-                fontSize: 30,
-                lineHeight: '40px',
-                color: 'white',
-                textAlign: 'center',
-                transition: 'all 0.3s',
-                '&:hover': {
-                    backgroundColor: colors.highlight,
-                    border: 'solid 1px transparent',
-                },
-            },
-        },
     },
     status: {
         gridColumn: 'leftAligned / leftAligned',

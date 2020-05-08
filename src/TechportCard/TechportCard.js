@@ -23,7 +23,7 @@ function TechportCard({ cardData }) {
         lastUpdated,
         startDate,
     } = cardData;
-    const { CardTitle, CardParagraph, ViewMore } = Slices;
+    const { CardTitle, CardParagraph, LabeledButton } = Slices;
     const classes = styles();
     const themeClasses = TechportTheme();
 
@@ -33,6 +33,7 @@ function TechportCard({ cardData }) {
         title: themeTitle,
         status: themedStatus,
         labeledData,
+        labeledButton,
     } = themeClasses;
 
     const {
@@ -51,7 +52,7 @@ function TechportCard({ cardData }) {
             to={`/card/${id}`}
             className="anchor"
         >
-            <div className="viewMoreButton">+</div>
+            <div className="labeledButton">+</div>
         </Link>
     );
 
@@ -60,7 +61,6 @@ function TechportCard({ cardData }) {
             'Last Updated': lastUpdated,
             'Start Date': startDate,
         }
-
     );
 
     return (
@@ -81,14 +81,14 @@ function TechportCard({ cardData }) {
             />
             <CardParagraph
                 text={description}
-                customClass={`${textRead} ${paragraphClass} `}
+                customClass={`${textRead} ${paragraphClass}`}
                 textClamp={{ lines: 2 }}
             />
             <LabeledData data={getLabeledData()} customClass={`${labeledData} ${projectDates} `} />
-            <ViewMore
+            <LabeledButton
                 label="More"
                 button={getViewMoreButton()}
-                customClass={viewMore}
+                customClass={`${labeledButton} ${viewMore}`}
             />
         </Card>
     );

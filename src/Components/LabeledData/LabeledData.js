@@ -7,12 +7,28 @@ const LabeledData = ({ data, customClass }) => {
     return (
         <div className={`LabeledData ${customClass}`}>
             {
-                keys.map((key) => (
-                    <div className="labeledDataEntry" key={key}>
-                        <h5 className="labeledDataLabel">{key}</h5>
-                        <h4 className="labeledDataValue">{data[key]}</h4>
-                    </div>
-                ))
+                keys.map((key) => {
+                    const currentKey = data[key];
+                    if (currentKey) {
+                        return (
+                            <div className="labeledDataEntry" key={key}>
+                                <h5 className="labeledDataLabel">{key}</h5>
+                                {
+                                    Array.isArray(currentKey) ?
+                                        <ul className="labeledDataValueList">
+                                            {
+                                                currentKey.map((currentValue) => {
+                                                    return <li>
+                                                        <h4 className="labeledDataValue">{currentValue}</h4>
+                                                    </li>
+                                                })
+                                            }
+                                        </ul> :
+                                        <h4 className="labeledDataValue">{currentKey}</h4>
+                                }
+                            </div>)
+                    } else return null;
+                })
             }
         </div>
     );
