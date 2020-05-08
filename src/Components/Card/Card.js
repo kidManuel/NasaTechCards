@@ -17,4 +17,9 @@ CardBase.propTypes = {
     children: PropTypes.arrayOf(
         PropTypes.object,
     ).isRequired,
+    customClass: PropTypes.string,
+};
+
+CardBase.defaultProps = {
+    customClass: '',
 };

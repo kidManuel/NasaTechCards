@@ -1,9 +1,11 @@
-import About from './About'
-import LastUpdated from './LastUpdated'
+import About from './About';
+import LastUpdated from './LastUpdated';
+import CardFull from './CardFull';
 
 const Routes = {
     About,
-    LastUpdated
+    LastUpdated,
+    CardFull,
 }
 
 export default Routes;

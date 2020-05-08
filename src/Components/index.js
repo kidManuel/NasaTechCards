@@ -4,6 +4,7 @@ import SimpleOnOff from './SimpleOnOff';
 import StatusIndicator from './StatusIndicator';
 import TechportTheme, { techportStatusColors, colors, themedScrollbar } from './TechportTheme';
 import TextClamp from './TextClamp';
+import LabeledData from './LabeledData';
 
 export {
     Card,
@@ -16,4 +17,5 @@ export {
     colors,
     themedScrollbar,
     TextClamp,
+    LabeledData,
 };

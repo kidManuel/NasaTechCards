@@ -6,7 +6,7 @@ import {
     Route,
 } from 'react-router-dom';
 import injectSheet from 'react-jss';
-import API from '../TechportApiUtil';
+import { getProjectsUpdatedLastWeek, getSingleProject } from '../TechportApiUtil';
 
 import Routes from '../Routes';
 import RouteMarker from '../RouteMarker';
@@ -18,26 +18,51 @@ import styles from './styles';
 class App extends Component {
     constructor(props) {
         super(props);
+        this.dataMemoization = this.dataMemoization.bind(this);
+        this.getSingleProjectData = this.getSingleProjectData.bind(this);
+        this.getDefaultContent = this.getDefaultContent.bind(this);
+
         this.state = {
             memo: {},
             favorited: [],
             selected: [],
             currentPage: '',
-            defaultContent: [],
-            isLoading: true
+            defaultContent: null,
+            expandedCard: null,
+            isMounting: true,
         };
-        this.dataMemoization = this.dataMemoization.bind(this);
     }
 
     componentDidMount() {
-        const { memo } = this.state;
-        API.getProjectsUpdatedLastWeek(memo).then((newDefaultContent) => {
-            this.setState({
-                memo: this.dataMemoization(newDefaultContent),
-                defaultContent: newDefaultContent,
-                isLoading: false,
+        this.setState({ isMounting: false });
+    }
+
+    getDefaultContent() {
+        const { memo, defaultContent } = this.state;
+        if (!defaultContent) {
+            getProjectsUpdatedLastWeek(memo).then((newDefaultContent) => {
+                this.setState({
+                    memo: this.dataMemoization(newDefaultContent),
+                    defaultContent: newDefaultContent,
+                });
             });
-        });
+            return null;
+        }
+        return defaultContent;
+    }
+
+    getSingleProjectData(idToFind) {
+        const { memo, expandedCard } = this.state;
+        if (!expandedCard) {
+            getSingleProject(idToFind, memo).then((currentProjectData) => {
+                this.setState({
+                    memo: this.dataMemoization([currentProjectData]),
+                    expandedCard: currentProjectData,
+                });
+            });
+            return null;
+        }
+        return expandedCard;
     }
 
     dataMemoization(data) {
@@ -58,30 +83,53 @@ class App extends Component {
 
 
     render() {
-        const { About, LastUpdated } = Routes;
+        const { About, LastUpdated, CardFull } = Routes;
         const { classes } = this.props;
         const {
-            base, logo, navigation, header,
+            base,
+            logo,
+            navigation,
+            header,
+            bodyContent,
         } = classes;
-        const { defaultContent, isLoading } = this.state;
+        const { defaultContent, isMounting } = this.state;
 
         return (
             <Router>
                 <div className={base}>
                     <header className={header}>
-                        <img className={logo} alt="Techport Logo" src="./media/logo.svg" />
+                        <img className={logo} alt="Techport Logo" src="/media/logo.svg" />
                     </header>
+                    {
+                        (!isMounting)
+                        && (
+                            <Switch>
+                                <Route exact path="/">
+                                    {
+                                        (this.getDefaultContent()) && (
+                                            <LastUpdated
+                                                customClass={bodyContent}
+                                                content={defaultContent}
+                                            />
+                                        )
+                                    }
+                                </Route>
+
+                                <Route
+                                    path="/card/:cardId"
+                                    render={({ match }) => (
+                                        this.getSingleProjectData(match.params.cardId)
+                                        && (<CardFull data={this.getSingleProjectData(match.params.cardId)} />)
+                                    )}
+                                />
+
+                                <Route exact path="/about">
+                                    <About customClass={bodyContent} />
+                                </Route>
+                            </Switch>
+                        )
+                    }
                     <NavBar customClass={navigation} />
-                    <Switch>
-                        <Route exact path="/">
-                            {
-                                (!isLoading) && <LastUpdated content={defaultContent} />
-                            }
-                        </Route>
-                        <Route exact path="/about">
-                            <About />
-                        </Route>
-                    </Switch>
                     <RouteMarker />
                 </div>
             </Router>
@@ -97,5 +145,6 @@ App.propTypes = {
         logo: PropTypes.string,
         navigation: PropTypes.string,
         header: PropTypes.string,
+        bodyContent: PropTypes.string,
     }).isRequired,
 };

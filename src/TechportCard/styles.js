@@ -36,35 +36,6 @@ const styles = createUseStyles({
         marginLeft: 25,
         marginBottom: 45,
     },
-    status: {
-        gridColumn: 'leftAligned / leftAligned',
-        gridRow: 'header / header',
-        border: 'solid 2px white',
-        justifySelf: 'start',
-        display: 'flex',
-        alignItems: 'center',
-
-        lineHeight: '25px',
-        paddingLeft: 12,
-        borderRadius: 25,
-
-        '& .statusPill': {
-            display: 'inline-block',
-            borderRadius: 18,
-            padding: '0 15px',
-            marginLeft: 25,
-            textTransform: 'capitalize',
-
-            /* cute hack to get the alignment right */
-            marginRight: -2,
-        },
-        '& .statusLabel': {
-            textTransform: 'uppercase',
-            display: 'inline-block',
-            fontSize: 11,
-            fontFamily: 'tussilago',
-        },
-    },
     bookmark: {
         gridColumn: 'rightAligned / rightAligned',
         gridRow: 'header / header',
@@ -79,6 +50,27 @@ const styles = createUseStyles({
         },
         '&.false': {
             backgroundPositionX: 0,
+        },
+    },
+    projectDates: {
+        gridColumn: 'leftAligned / leftAligned',
+        gridRow: 'footer / footer',
+        display: 'flex',
+        height: 50,
+        flexDirection: 'row',
+        textAlign: 'left',
+        alignSelf: 'end',
+        marginLeft: 25,
+        '& .labeledDataEntry': {
+            display: 'flex',
+            flexDirection: 'column',
+            marginRight: 25,
+            '& .labeledDataValue': {
+                order: 1,
+            },
+            '& .labeledDataLabel': {
+                order: 2,
+            },
         },
     },
     viewMore: {
@@ -115,6 +107,10 @@ const styles = createUseStyles({
             },
         },
     },
+    status: {
+        gridColumn: 'leftAligned / leftAligned',
+        gridRow: 'header / header',
+    }
 });
 
 export default styles;

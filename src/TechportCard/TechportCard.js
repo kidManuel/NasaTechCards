@@ -9,39 +9,66 @@ import {
     TechportTheme,
     techportStatusColors,
     SimpleOnOff,
+    LabeledData,
 } from '../Components';
 import styles from './styles';
 
 
-function TechportCard({ title, paragraph, projectStatus }) {
+function TechportCard({ cardData }) {
+    const {
+        title,
+        description,
+        status,
+        id,
+        lastUpdated,
+        startDate,
+    } = cardData;
     const { CardTitle, CardParagraph, ViewMore } = Slices;
     const classes = styles();
     const themeClasses = TechportTheme();
 
-    const { modalContainer, textRead, title: themeTitle } = themeClasses;
+    const {
+        modalContainer,
+        textRead,
+        title: themeTitle,
+        status: themedStatus,
+        labeledData,
+    } = themeClasses;
+
     const {
         base,
         title: titleClass,
         paragraph: paragraphClass,
-        status: statusClass,
         bookmark,
-        viewMore
+        viewMore,
+        projectDates,
+        status: statusClass,
     } = classes;
 
 
     const getViewMoreButton = () => (
-        <Link to="/card/:cardId" className="anchor">
+        <Link
+            to={`/card/${id}`}
+            className="anchor"
+        >
             <div className="viewMoreButton">+</div>
         </Link>
     );
 
+    const getLabeledData = () => (
+        {
+            'Last Updated': lastUpdated,
+            'Start Date': startDate,
+        }
+
+    );
 
     return (
         <Card customClass={`${base} ${modalContainer}`}>
             <StatusIndicator
                 label="status"
-                currentStatus={projectStatus}
-                customClass={statusClass}
+                currentStatus={status}
+                customClass={`${themedStatus} ${statusClass}`}
                 statusTheme={techportStatusColors}
             />
             <SimpleOnOff
@@ -53,10 +80,11 @@ function TechportCard({ title, paragraph, projectStatus }) {
                 textClamp={{ lines: 2 }}
             />
             <CardParagraph
-                text={paragraph}
-                customClass={`${textRead} ${paragraphClass}`}
+                text={description}
+                customClass={`${textRead} ${paragraphClass} `}
                 textClamp={{ lines: 2 }}
             />
+            <LabeledData data={getLabeledData()} customClass={`${labeledData} ${projectDates} `} />
             <ViewMore
                 label="More"
                 button={getViewMoreButton()}
@@ -69,13 +97,10 @@ function TechportCard({ title, paragraph, projectStatus }) {
 export default TechportCard;
 
 TechportCard.propTypes = {
-    title: PropTypes.string,
-    paragraph: PropTypes.string,
-    projectStatus: PropTypes.string,
-};
-
-TechportCard.defaultProps = {
-    title: '',
-    paragraph: '',
-    projectStatus: '',
+    cardData: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+        status: PropTypes.string,
+        id: PropTypes.number,
+    }).isRequired,
 };

@@ -6,12 +6,12 @@ import TechportCard from '../../TechportCard';
 import styles from './styles';
 
 
-const LastUpdated = ({ content }) => {
+const LastUpdated = ({ content, customClass }) => {
     const classes = styles();
     const theme = TechportTheme();
 
     return (
-        <div className="lastUpdated">
+        <div className={`lastUpdated ${customClass}`}>
 
             <PaginationContainer
                 itemsPerSlide={6}
@@ -21,12 +21,10 @@ const LastUpdated = ({ content }) => {
                 `}
             >
                 {
-                    content.map((singleProject, index) => (
+                    content.map((singleProject) => (
                         <TechportCard
-                            key={index}
-                            title={singleProject.title}
-                            paragraph={singleProject.description}
-                            projectStatus={singleProject.status}
+                            cardData={singleProject}
+                            key={singleProject.id}
                         />
                     ))
                 }
@@ -39,4 +37,9 @@ export default LastUpdated;
 
 LastUpdated.propTypes = {
     content: PropTypes.arrayOf(PropTypes.object).isRequired,
+    customClass: PropTypes.string,
+};
+
+LastUpdated.defaultProps = {
+    customClass: '',
 };

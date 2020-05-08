@@ -38,6 +38,33 @@ const theme = createUseStyles({
         fontFamily: 'acumin-pro',
         color: 'white',
     },
+    status: {
+        border: 'solid 2px white',
+        justifySelf: 'start',
+        display: 'flex',
+        alignItems: 'center',
+
+        lineHeight: '25px',
+        paddingLeft: 12,
+        borderRadius: 25,
+
+        '& .statusPill': {
+            display: 'inline-block',
+            borderRadius: 18,
+            padding: '0 15px',
+            marginLeft: 25,
+            textTransform: 'capitalize',
+
+            /* cute hack to get the alignment right */
+            marginRight: -2,
+        },
+        '& .statusLabel': {
+            textTransform: 'uppercase',
+            display: 'inline-block',
+            fontSize: 11,
+            fontFamily: 'tussilago',
+        },
+    },
     pagination: {
         '& .paginationSlides': {
             extend: themedScrollbar.withThemedScrollbar,
@@ -101,6 +128,17 @@ const theme = createUseStyles({
             },
         },
     },
+    labeledData: {
+        display: 'flex',
+        flexDirection: 'column',
+        '& .labeledDataLabel': {
+            fontSize: 12,
+        },
+        '& .labeledDataValue': {
+            fontSize: 20,
+        }
+
+    }
 });
 
 export default theme;
