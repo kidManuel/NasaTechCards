@@ -9,17 +9,16 @@ class PaginationContainer extends Component {
     constructor(props) {
         super(props);
 
-        const { initialSlide, itemsPerSlide, children } = this.props;
-        const totalSlides = Math.ceil(children.length / itemsPerSlide);
+        const { initialSlide } = this.props;
 
         this.getCurrentSlideElements = this.getCurrentSlideElements.bind(this);
+        this.calculateTotalSlides = this.calculateTotalSlides.bind(this);
         this.goToNext = this.goToNext.bind(this);
         this.goToPrev = this.goToPrev.bind(this);
         this.goToX = this.goToX.bind(this);
 
         this.state = {
-            currentSlide: initialSlide,
-            totalSlides,
+            currentSlide: initialSlide
         };
     }
 
@@ -30,21 +29,18 @@ class PaginationContainer extends Component {
         const startingItem = (itemsPerSlide * currentSlide);
         const targetItem = startingItem + itemsPerSlide;
 
-
         /* I'm sure we can do some magic with slice but I'd rather KISS */
         for (let e = startingItem; e < targetItem; e++) {
             const singleElement = children[e];
             if (singleElement) slideElements.push(singleElement);
         }
 
-        if (!slideElements.length) {
-            throw new Error('Somethign went wrong and you shouldnt be in this slide');
-        }
-        return slideElements;
+        return slideElements
     }
 
     goToNext() {
-        const { currentSlide, totalSlides } = this.state;
+        const { currentSlide } = this.state;
+        const totalSlides = this.calculateTotalSlides();
         if (currentSlide + 1 < totalSlides) {
             this.goToX(currentSlide + 1);
         }
@@ -58,7 +54,7 @@ class PaginationContainer extends Component {
     }
 
     goToX(target) {
-        const { totalSlides } = this.state;
+        const totalSlides = this.calculateTotalSlides();
         if (target <= totalSlides) {
             this.setState({
                 currentSlide: target,
@@ -66,29 +62,39 @@ class PaginationContainer extends Component {
         }
     }
 
+    calculateTotalSlides() {
+        const { itemsPerSlide, children } = this.props;
+        return Math.ceil(children.length / itemsPerSlide);
+    }
+
     render() {
         const { customClassName, classes } = this.props;
-        const { totalSlides, currentSlide } = this.state;
+        const { currentSlide } = this.state;
+        const totalSlides = this.calculateTotalSlides();
+        const currentSlideElements = this.getCurrentSlideElements();
         const { paginationContainerClass } = classes;
 
-        return (
-            <div className={`${paginationContainerClass} ${customClassName}`}>
-                <div className="paginationSlides">
-                    {
-                        this.getCurrentSlideElements()
-                            .map((item) => item)
-                    }
+        if (currentSlideElements) {
+            return (
+                <div className={`${paginationContainerClass} ${customClassName}`}>
+                    <div className="paginationSlides">
+                        {
+                            currentSlideElements
+                                .map((item) => item)
+                        }
+                    </div>
+                    <PaginationButtons
+                        maxNumber={totalSlides}
+                        nextCallback={this.goToNext}
+                        prevCallback={this.goToPrev}
+                        goToX={this.goToX}
+                        label="page"
+                        currentSlide={currentSlide}
+                    />
                 </div>
-                <PaginationButtons
-                    maxNumber={totalSlides}
-                    nextCallback={this.goToNext}
-                    prevCallback={this.goToPrev}
-                    goToX={this.goToX}
-                    label="page"
-                    currentSlide={currentSlide}
-                />
-            </div>
-        );
+            );
+        }
+        return null;
     }
 }
 

@@ -69,6 +69,7 @@ function TechportCard({ cardData, toggleSelectedCallback }) {
 
     const toggleSelected = (newState) => {
         setSelected(newState);
+        toggleSelectedCallback(id, newState);
     }
 
     return (

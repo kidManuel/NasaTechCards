@@ -10,6 +10,7 @@ import { getProjectsUpdatedLastWeek, getSingleProject } from '../TechportApiUtil
 
 import Routes from '../Routes';
 import RouteMarker from '../RouteMarker';
+import { Title } from '../Components';
 
 import NavBar from './NavBar';
 import styles from './styles';
@@ -22,15 +23,19 @@ class App extends Component {
         this.getSingleProjectData = this.getSingleProjectData.bind(this);
         this.getDefaultContent = this.getDefaultContent.bind(this);
         this.routeChangeCallback = this.routeChangeCallback.bind(this);
+        this.handleItemsSelection = this.handleItemsSelection.bind(this);
+        this.deleteElements = this.deleteElements.bind(this);
+        this.favouriteElements = this.favouriteElements.bind(this);
 
         this.state = {
             memo: {},
             favorited: [],
             selected: [],
             currentPage: 'Last Updated',
-            defaultContent: null,
+            currentDisplay: null,
             expandedCard: null,
             isMounting: true,
+            hasSelected: false,
         };
     }
 
@@ -39,17 +44,17 @@ class App extends Component {
     }
 
     getDefaultContent() {
-        const { memo, defaultContent } = this.state;
-        if (!defaultContent) {
+        const { memo, currentDisplay } = this.state;
+        if (!currentDisplay) {
             getProjectsUpdatedLastWeek(memo).then((newDefaultContent) => {
                 this.setState({
                     memo: this.dataMemoization(newDefaultContent),
-                    defaultContent: newDefaultContent,
+                    currentDisplay: newDefaultContent,
                 });
             });
             return null;
         }
-        return defaultContent;
+        return currentDisplay;
     }
 
     getSingleProjectData(idToFind) {
@@ -88,6 +93,47 @@ class App extends Component {
         })
     }
 
+    handleItemsSelection(id, newState) {
+        const { selected } = this.state;
+        const newSelected = [...selected];
+        const itemPosition = newSelected.indexOf(id);
+        const inArray = itemPosition >= 0;
+
+        if (newState && !inArray) {
+            newSelected.push(id);
+        }
+        if (!newState && inArray) {
+            newSelected.splice(itemPosition, 1)
+        };
+
+        this.setState({
+            selected: newSelected,
+            hasSelected: (!!newSelected.length),
+        })
+    }
+
+    deleteElements() {
+        const { selected, currentDisplay } = this.state;
+        const newCurrentDisplay = [...currentDisplay];
+        selected.forEach((idToDelete) => {
+            const position = newCurrentDisplay.findIndex((currentElement) => {
+                return currentElement.id === idToDelete
+            })
+
+            newCurrentDisplay.splice(position, 1);
+        })
+
+        this.setState({
+            selected: [],
+            currentDisplay: newCurrentDisplay,
+        })
+    }
+
+    favouriteElements() {
+
+    }
+
+
     render() {
         const { About, LastUpdated, CardFull } = Routes;
         const { classes } = this.props;
@@ -97,14 +143,25 @@ class App extends Component {
             navigation,
             header,
             bodyContent,
+            actions
         } = classes;
-        const { defaultContent, isMounting, currentPage } = this.state;
+        const { currentDisplay, isMounting, currentPage, hasSelected } = this.state;
 
         return (
             <Router>
                 <div className={base}>
                     <header className={header}>
                         <img className={logo} alt="Techport Logo" src="/media/logo.svg" />
+                        {
+                            (hasSelected)
+                            && (
+                                <div className={actions}>
+                                    <h3 className="actionsLabel">Actions:</h3>
+                                    <div onClick={this.deleteElements} className={"actionButton delete"} />
+                                    <div onClick={this.favouriteElements} className={"actionButton bookmark"} />
+                                </div>
+                            )
+                        }
                     </header>
                     {
                         (!isMounting)
@@ -115,8 +172,9 @@ class App extends Component {
                                         (this.getDefaultContent()) && (
                                             <LastUpdated
                                                 customClass={bodyContent}
-                                                content={defaultContent}
+                                                content={currentDisplay}
                                                 enterCallback={this.routeChangeCallback}
+                                                itemSelection={this.handleItemsSelection}
                                             />
                                         )
                                     }
