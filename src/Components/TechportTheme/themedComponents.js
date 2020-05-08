@@ -5,7 +5,8 @@ import themedScrollbar from './themedScrollbar';
 const {
     bgMain,
     bgSecondary,
-    bgContrast
+    bgContrast,
+    bgTertiary,
 } = colors;
 
 
@@ -18,6 +19,9 @@ const theme = createUseStyles({
         color: 'white',
         boxSizing: 'border-box',
         transition: 'all 0.3s',
+        '&.selected': {
+            backgroundColor: bgTertiary,
+        },
     },
     title: {
         fontFamily: 'tussilago',
@@ -28,6 +32,7 @@ const theme = createUseStyles({
         textTransform: 'uppercase',
         overflowWrap: 'break-word',
         fontWeight: 700,
+        pointerEvents: 'none',
     },
     textRead: {
         textAlign: 'left',
@@ -191,6 +196,27 @@ const theme = createUseStyles({
         textAlign: 'center',
         borderRadius: 100,
         padding: '25px 100px'
+    },
+    selectCheckbox: {
+        justifySelf: 'end',
+        '&:after': {
+            fontSize: 12,
+            content: '""',
+            display: 'inline-block',
+            border: 'solid 1px white',
+            padding: '5px 0',
+            borderRadius: 20,
+            width: 100,
+            textTransform: 'uppercase',
+            textAlign: 'center',
+            cursor: 'pointer',
+        },
+        '&.true:after': {
+            content: '"deselect"',
+        },
+        '&.false:after': {
+            content: '"select"',
+        }
     }
 });
 

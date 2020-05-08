@@ -1,5 +1,4 @@
 import { createUseStyles } from 'react-jss';
-import { colors } from '../../Components';
 
 const styles = createUseStyles({
     aboutBody: {

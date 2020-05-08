@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -16,7 +16,9 @@ import {
 import styles from './styles';
 
 
-function TechportCard({ cardData }) {
+function TechportCard({ cardData, toggleSelectedCallback }) {
+    const [selected, setSelected] = useState(false);
+
     const {
         title,
         description,
@@ -35,14 +37,14 @@ function TechportCard({ cardData }) {
         status: themedStatus,
         labeledData,
         labeledButton,
-        bookmark: themedBookmark,
+        selectCheckbox,
     } = themeClasses;
 
     const {
         base,
         title: titleClass,
         paragraph: paragraphClass,
-        bookmark,
+        select,
         viewMore,
         projectDates,
         status: statusClass,
@@ -65,8 +67,12 @@ function TechportCard({ cardData }) {
         }
     );
 
+    const toggleSelected = (newState) => {
+        setSelected(newState);
+    }
+
     return (
-        <Card customClass={`${base} ${modalContainer}`}>
+        <Card customClass={`${base} ${modalContainer} ${selected ? 'selected' : null}`}>
             <StatusIndicator
                 label="status"
                 currentStatus={status}
@@ -74,7 +80,8 @@ function TechportCard({ cardData }) {
                 statusTheme={techportStatusColors}
             />
             <SimpleOnOff
-                customClass={`${themedBookmark} ${bookmark}`}
+                customClass={`${selectCheckbox} ${select}`}
+                stateChangeCallback={toggleSelected}
             />
             <Title
                 text={title}

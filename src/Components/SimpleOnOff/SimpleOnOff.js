@@ -5,14 +5,9 @@ class SimpleOnOff extends Component {
     constructor(props) {
         super(props);
         this.changeState = this.changeState.bind(this);
-        this.onClick = this.onClick.bind(this);
         this.state = {
             on: false
         }
-    }
-
-    onClick() {
-        this.changeState();
     }
 
     changeState(callback) {
@@ -23,9 +18,9 @@ class SimpleOnOff extends Component {
     }
 
     render() {
-        const { customClass } = this.props;
+        const { customClass, stateChangeCallback } = this.props;
         const { on } = this.state;
-        return <div onClick={this.onClick} className={`simpleOnOff ${on} ${customClass}`}></div>
+        return <div onClick={() => this.changeState(stateChangeCallback)} className={`simpleOnOff ${on} ${customClass}`}></div>
     };
 }
 
