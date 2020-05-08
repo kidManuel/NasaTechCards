@@ -40,6 +40,6 @@
         "react-hooks/exhaustive-deps": "warn",
         "max-len": ["error", {
             "code": 130
-        }],
+        }]
     }
 }

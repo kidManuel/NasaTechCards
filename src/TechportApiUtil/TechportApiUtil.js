@@ -10,7 +10,7 @@ const {
 } = constants;
 
 // TO BE USED ONLY IN DEVELOPMENT
-const useMockData = true;
+const useMockData = false;
 
 function itemsToIds(items) {
     if (!Array.isArray(items)) {
@@ -77,7 +77,7 @@ async function getProjectsByDate(horizonDate, memo) {
 
     projectIdsRaw.forEach((singleProject) => {
         projectsDataPromises.push(
-            memo[singleProject] || getSingleProject(singleProject),
+            memo[singleProject] || getSingleProject(singleProject, memo),
         );
     });
 

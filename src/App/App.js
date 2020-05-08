@@ -10,7 +10,6 @@ import { getProjectsUpdatedLastWeek, getSingleProject } from '../TechportApiUtil
 
 import Routes from '../Routes';
 import RouteMarker from '../RouteMarker';
-import { Title } from '../Components';
 
 import NavBar from './NavBar';
 import styles from './styles';
@@ -21,7 +20,6 @@ class App extends Component {
         super(props);
         this.dataMemoization = this.dataMemoization.bind(this);
         this.getSingleProjectData = this.getSingleProjectData.bind(this);
-        this.getDefaultContent = this.getDefaultContent.bind(this);
         this.routeChangeCallback = this.routeChangeCallback.bind(this);
         this.handleItemsSelection = this.handleItemsSelection.bind(this);
         this.deleteElements = this.deleteElements.bind(this);
@@ -40,21 +38,17 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.setState({ isMounting: false });
-    }
-
-    getDefaultContent() {
         const { memo, currentDisplay } = this.state;
         if (!currentDisplay) {
             getProjectsUpdatedLastWeek(memo).then((newDefaultContent) => {
+                const filteredContent = newDefaultContent.filter((entry) => !!entry);
                 this.setState({
-                    memo: this.dataMemoization(newDefaultContent),
-                    currentDisplay: newDefaultContent,
+                    isMounting: false,
+                    memo: this.dataMemoization(filteredContent),
+                    currentDisplay: filteredContent,
                 });
             });
-            return null;
         }
-        return currentDisplay;
     }
 
     getSingleProjectData(idToFind) {
@@ -71,20 +65,11 @@ class App extends Component {
         return expandedCard;
     }
 
-    dataMemoization(data) {
-        // Some entries in the data could potentially be lost
-        // due to shallow cloning.
-        // Potential solution is using external libraries
-        // such as lodash.cloneDeep
-        const { memo } = this.state;
-        const newMemo = { ...memo };
-        data.forEach((singleProject) => {
-            const { id } = singleProject;
-            if (!newMemo[id]) {
-                newMemo[id] = singleProject;
-            }
-        });
-        return newMemo;
+    getFavoritesData() {
+        // For an item to be able to be favorited, it necessarily has to be in memo
+        // So no need to async
+        const { favorited, memo } = this.state;
+        return favorited.map((favoriteId) => memo[favoriteId]);
     }
 
     routeChangeCallback(newRoute) {
@@ -92,7 +77,7 @@ class App extends Component {
             currentPage: newRoute,
             hasSelected: false,
             selected: [],
-        })
+        });
     }
 
     handleItemsSelection(id, newState) {
@@ -105,60 +90,69 @@ class App extends Component {
             newSelected.push(id);
         }
         if (!newState && inArray) {
-            newSelected.splice(itemPosition, 1)
-        };
+            newSelected.splice(itemPosition, 1);
+        }
 
         this.setState({
             selected: newSelected,
             hasSelected: (!!newSelected.length),
-        })
+        });
     }
 
     deleteElements() {
         const { selected, currentDisplay } = this.state;
         const newCurrentDisplay = [...currentDisplay];
         selected.forEach((idToDelete) => {
-            const position = newCurrentDisplay.findIndex((currentElement) => {
-                return currentElement.id === idToDelete
-            })
+            const position = newCurrentDisplay.findIndex((currentElement) => currentElement.id === idToDelete);
 
             newCurrentDisplay.splice(position, 1);
-        })
+        });
 
         this.setState({
             selected: [],
             hasSelected: false,
             currentDisplay: newCurrentDisplay,
-        })
+        });
     }
 
     favouriteElements() {
         const { selected, favorited } = this.state;
         const newFavorited = [...favorited];
 
-        selected.forEach((selected) => {
-            if (newFavorited.indexOf(selected) < 0) newFavorited.push(selected);
-        })
+        selected.forEach((favorite) => {
+            if (newFavorited.indexOf(favorite) < 0) newFavorited.push(favorite);
+        });
 
         this.setState({
             selected: [],
             hasSelected: false,
             favorited: newFavorited,
-        })
+        });
     }
 
-    getFavoritesData() {
-        // For an item to be able to be favorited, it necessarily has to be in memo
-        // So no need to async
-        const { favorited, memo } = this.state;
+    dataMemoization(data) {
+        // Some entries in the data could potentially be lost
+        // due to shallow cloning.
+        // Potential solution is using external libraries
+        // such as lodash.cloneDeep
+        const { memo } = this.state;
+        const newMemo = { ...memo };
 
-        const content = favorited.map((favoriteId) => memo[favoriteId])
-
-        return content;
+        data.forEach((singleProject) => {
+            if (singleProject) {
+                const { id } = singleProject;
+                if (!newMemo[id]) {
+                    newMemo[id] = singleProject;
+                }
+            }
+        });
+        return newMemo;
     }
 
     render() {
-        const { About, LastUpdated, CardFull, Favorites } = Routes;
+        const {
+            About, LastUpdated, CardFull, Favorites,
+        } = Routes;
         const { classes } = this.props;
         const {
             base,
@@ -166,9 +160,11 @@ class App extends Component {
             navigation,
             header,
             bodyContent,
-            actions
+            actions,
         } = classes;
-        const { currentDisplay, isMounting, currentPage, hasSelected } = this.state;
+        const {
+            currentDisplay, isMounting, currentPage, hasSelected,
+        } = this.state;
 
         return (
             <Router>
@@ -180,8 +176,8 @@ class App extends Component {
                             && (
                                 <div className={actions}>
                                     <h3 className="actionsLabel">Actions:</h3>
-                                    <div onClick={this.deleteElements} className={"actionButton delete"} />
-                                    <div onClick={this.favouriteElements} className={"actionButton bookmark"} />
+                                    <button onClick={this.deleteElements} className="actionButton delete" />
+                                    <button onClick={this.favouriteElements} className="actionButton bookmark" />
                                 </div>
                             )
                         }
@@ -192,7 +188,7 @@ class App extends Component {
                             <Switch>
                                 <Route exact path="/">
                                     {
-                                        (this.getDefaultContent()) && (
+                                        (currentDisplay) && (
                                             <LastUpdated
                                                 customClass={bodyContent}
                                                 content={currentDisplay}
@@ -204,13 +200,11 @@ class App extends Component {
                                 </Route>
 
                                 <Route exact path="/favorites">
-                                    {
-                                        <Favorites
-                                            customClass={bodyContent}
-                                            content={this.getFavoritesData()}
-                                            enterCallback={this.routeChangeCallback}
-                                        />
-                                    }
+                                    <Favorites
+                                        customClass={bodyContent}
+                                        content={this.getFavoritesData()}
+                                        enterCallback={this.routeChangeCallback}
+                                    />
                                 </Route>
 
                                 <Route
@@ -247,5 +241,6 @@ App.propTypes = {
         navigation: PropTypes.string,
         header: PropTypes.string,
         bodyContent: PropTypes.string,
+        actions: PropTypes.string,
     }).isRequired,
 };

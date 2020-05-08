@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ClampLines from 'react-clamp-lines';
+import LinesEllipsis from 'react-lines-ellipsis'
 
 const TextClamp = ({ params, text }) => {
     const { lines } = params;
@@ -9,7 +9,7 @@ const TextClamp = ({ params, text }) => {
     }
 
     return (
-        <ClampLines buttons={false} text={text} {...params} />
+        <LinesEllipsis ellipsis="-" text={text} maxLine={2} />
     );
 };
 
