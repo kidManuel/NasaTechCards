@@ -21,12 +21,13 @@ class App extends Component {
         this.dataMemoization = this.dataMemoization.bind(this);
         this.getSingleProjectData = this.getSingleProjectData.bind(this);
         this.getDefaultContent = this.getDefaultContent.bind(this);
+        this.routeChangeCallback = this.routeChangeCallback.bind(this);
 
         this.state = {
             memo: {},
             favorited: [],
             selected: [],
-            currentPage: '',
+            currentPage: 'Last Updated',
             defaultContent: null,
             expandedCard: null,
             isMounting: true,
@@ -81,6 +82,11 @@ class App extends Component {
         return newMemo;
     }
 
+    routeChangeCallback(newRoute) {
+        this.setState({
+            currentPage: newRoute,
+        })
+    }
 
     render() {
         const { About, LastUpdated, CardFull } = Routes;
@@ -92,7 +98,7 @@ class App extends Component {
             header,
             bodyContent,
         } = classes;
-        const { defaultContent, isMounting } = this.state;
+        const { defaultContent, isMounting, currentPage } = this.state;
 
         return (
             <Router>
@@ -110,6 +116,7 @@ class App extends Component {
                                             <LastUpdated
                                                 customClass={bodyContent}
                                                 content={defaultContent}
+                                                enterCallback={this.routeChangeCallback}
                                             />
                                         )
                                     }
@@ -119,18 +126,21 @@ class App extends Component {
                                     path="/card/:cardId"
                                     render={({ match }) => (
                                         this.getSingleProjectData(match.params.cardId)
-                                        && (<CardFull data={this.getSingleProjectData(match.params.cardId)} />)
+                                        && (<CardFull enterCallback={this.routeChangeCallback} data={this.getSingleProjectData(match.params.cardId)} />)
                                     )}
                                 />
 
                                 <Route exact path="/about">
-                                    <About customClass={bodyContent} />
+                                    <About
+                                        customClass={bodyContent}
+                                        enterCallback={this.routeChangeCallback}
+                                    />
                                 </Route>
                             </Switch>
                         )
                     }
                     <NavBar customClass={navigation} />
-                    <RouteMarker />
+                    <RouteMarker currentRoute={currentPage} />
                 </div>
             </Router>
         );

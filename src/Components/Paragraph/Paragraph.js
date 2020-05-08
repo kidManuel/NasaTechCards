@@ -1,22 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextClamp from '../../TextClamp';
+import { TextClamp } from '../';
 
-function CardTitle({ text, customClass, textClamp }) {
+function Paragraph({ text, customClass, textClamp }) {
     const getText = () => {
         return textClamp ? <TextClamp params={textClamp} text={text} /> : text;
     }
 
     return (
-        <div className={`CardTitle ${customClass}`} >{
+        <div className={`cardParagraph ${customClass}`}>{
             // ensure component degrades gracefully if a bad textClamp param is passed
             getText() || text
         }</div>
     );
 }
 
-export default CardTitle;
+export default Paragraph;
 
-CardTitle.propTypes = {
+Paragraph.propTypes = {
     text: PropTypes.string.isRequired,
+    customClass: PropTypes.string,
+    clampLines: PropTypes.number
 };
+
+Paragraph.defaultProps = {
+    customClass: '',
+    clampLines: null
+}

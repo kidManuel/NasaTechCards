@@ -1,14 +1,17 @@
-import Card, { Slices } from './Card';
+import Card from './Card';
 import PaginationContainer from './PaginationContainer';
 import SimpleOnOff from './SimpleOnOff';
 import StatusIndicator from './StatusIndicator';
 import TechportTheme, { techportStatusColors, colors, themedScrollbar } from './TechportTheme';
 import TextClamp from './TextClamp';
 import LabeledData from './LabeledData';
+import Paragraph from './Paragraph';
+import Title from './Title';
+import LabeledButton from './LabeledButton';
+
 
 export {
     Card,
-    Slices,
     PaginationContainer,
     SimpleOnOff,
     StatusIndicator,
@@ -18,4 +21,7 @@ export {
     themedScrollbar,
     TextClamp,
     LabeledData,
+    Paragraph,
+    Title,
+    LabeledButton,
 };

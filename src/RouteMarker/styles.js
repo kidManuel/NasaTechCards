@@ -6,16 +6,28 @@ const styles = createUseStyles({
         position: 'fixed',
         right: 0,
         bottom: 0,
-        width: '75vw',
-        height: '93vh',
         zIndex: 0,
         backgroundColor: colors.bgContrast,
         borderTopLeftRadius: 30,
+        '&.LastUpdated': {
+            width: '75vw',
+            height: '93vh',
+            '& $text': {
+                bottom: 25,
+                left: '30%',
+            },
+        },
+        '&.About': {
+            height: '93vh',
+            width: '30vw',
+            '& $text': {
+                top: '40%',
+                transform: 'rotateZ(-90deg)',
+            }
+        }
     },
     text: {
         position: 'absolute',
-        bottom: 25,
-        left: '30%',
         fontSize: 180,
         color: 'white',
         fontFamily: 'tussilago',

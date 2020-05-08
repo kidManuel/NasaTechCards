@@ -4,16 +4,16 @@ import { useHistory } from 'react-router-dom';
 
 import {
     Card,
-    Slices,
     StatusIndicator,
     TechportTheme,
     techportStatusColors,
     SimpleOnOff,
     LabeledData,
+    Title,
+    Paragraph,
+    LabeledButton
 } from '../../Components';
 import styles from './styles';
-
-const { CardTitle, CardParagraph, LabeledButton } = Slices;
 
 const CardFull = ({ data }) => {
     const classes = styles();
@@ -94,19 +94,19 @@ const CardFull = ({ data }) => {
                 }
 
                 <div className={bodyContent}>
-                    <CardTitle
+                    <Title
                         text={title}
                         customClass={`${themeTitle} ${titleClass}`}
                     />
-                    <CardParagraph
+                    <Paragraph
                         text={description}
                         customClass={`${textRead} ${paragraphClass}`}
                     />
-                    <CardTitle
+                    <Title
                         text="Benefits"
                         customClass={`${themeTitle} ${titleClass} benefits`}
                     />
-                    <CardParagraph
+                    <Paragraph
                         text={benefits}
                         customClass={`${textRead} ${paragraphClass}`}
                     />

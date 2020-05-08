@@ -11,10 +11,11 @@ const styles = {
         gridTemplateColumns: '[leftAligned] auto [rightAligned] auto',
     },
     header: {
-        flexBasis: '100%',
+        height: '9vh',
+        marginBottom: '4vh'
     },
     logo: {
-        width: '15vw',
+        height: '100%',
         position: 'relative',
         zIndex: 3,
     },
@@ -27,7 +28,6 @@ const styles = {
         gridColumn: 'rightAligned / rightAligned',
         textAlign: 'right',
         pointerEvents: 'none',
-
         '& .routeLink': {
             textDecoration: 'none',
             fontSize: 60,
@@ -36,7 +36,6 @@ const styles = {
             color: colors.bgMain,
             position: 'relative',
             pointerEvents: 'auto',
-
             '&.selected': {
                 fontWeight: 700,
                 color: colors.highlight,

@@ -7,12 +7,12 @@ import styles from './styles';
 function RouteMarker({ currentRoute }) {
     const classes = styles();
     const { container, text } = classes;
-    const editedText = currentRoute.replace(' ', '\n')
+    const routeClass = currentRoute.replace(' ', '');
 
     return (
-        <div className={container}>
+        <div className={`${container} ${routeClass}`}>
             <div className={text}>
-                <h3>{editedText}</h3>
+                <h3>{currentRoute}</h3>
             </div>
         </div>
     );

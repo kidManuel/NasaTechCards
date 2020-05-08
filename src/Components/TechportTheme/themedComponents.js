@@ -84,7 +84,7 @@ const theme = createUseStyles({
         '& .paginationButtonsTrack': {
             position: 'absolute',
             right: 0,
-            bottom: 0,
+            bottom: '5vh',
             background: bgMain,
             color: 'white',
             height: 40,
