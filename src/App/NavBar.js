@@ -8,17 +8,17 @@ const NavBar = ({ customClass }) => (
     <nav className={customClass}>
         <ul className="sections">
             <li>
-                <NavLink activeClassName="selected" className="routeLink" to="/">
+                <NavLink exact activeClassName="selected" className="routeLink" to="/">
                     Last Updated
                 </NavLink>
             </li>
             <li>
-                <NavLink activeClassName="selected" className="routeLink" to="/favourites">
+                <NavLink exact activeClassName="selected" className="routeLink" to="/favourites">
                     Your Favorites
                 </NavLink>
             </li>
             <li>
-                <NavLink activeClassName="selected" className="routeLink" to="/about">
+                <NavLink exact activeClassName="selected" className="routeLink" to="/about">
                     About
                 </NavLink>
             </li>

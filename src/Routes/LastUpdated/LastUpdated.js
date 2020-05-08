@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { PaginationContainer, TechportTheme } from '../../Components';
@@ -6,10 +6,13 @@ import TechportCard from '../../TechportCard';
 import styles from './styles';
 
 
-const LastUpdated = ({ content, customClass }) => {
+const LastUpdated = ({ content, customClass, enterCallback }) => {
     const classes = styles();
     const theme = TechportTheme();
 
+    useEffect(() => {
+        enterCallback('Last Updated');
+    }, []);
     return (
         <div className={`lastUpdated ${customClass}`}>
 
