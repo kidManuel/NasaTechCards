@@ -157,7 +157,6 @@ const theme = createUseStyles({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-
         '& .labeledButtonLabel': {
             textTransform: 'uppercase',
             fontFamily: 'tussilago',
@@ -166,20 +165,21 @@ const theme = createUseStyles({
         },
         '& .anchor': {
             textDecoration: 'none',
-            '& .labeledButton': {
-                width: 50,
-                height: 50,
-                border: 'solid 1px white',
-                borderRadius: 25,
-                fontSize: 30,
-                lineHeight: '40px',
-                color: 'white',
-                textAlign: 'center',
-                transition: 'all 0.3s',
-                '&:hover': {
-                    backgroundColor: colors.highlight,
-                    border: 'solid 1px transparent',
-                },
+        },
+        '& .labeledButton': {
+            width: 50,
+            height: 50,
+            border: 'solid 1px white',
+            borderRadius: 25,
+            fontSize: 30,
+            lineHeight: '40px',
+            color: 'white',
+            textAlign: 'center',
+            transition: 'all 0.3s',
+            cursor: 'pointer',
+            '&:hover': {
+                backgroundColor: colors.highlight,
+                border: 'solid 1px transparent',
             },
         },
     },

@@ -53,7 +53,7 @@ class App extends Component {
 
     getSingleProjectData(idToFind) {
         const { memo, expandedCard } = this.state;
-        if (!expandedCard) {
+        if ((!expandedCard) || (expandedCard.id !== Number(idToFind))) {
             getSingleProject(idToFind, memo).then((currentProjectData) => {
                 this.setState({
                     memo: this.dataMemoization([currentProjectData]),

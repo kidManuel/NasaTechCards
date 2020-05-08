@@ -1,5 +1,4 @@
 import { createUseStyles } from 'react-jss'
-import { colors } from '../Components';
 
 const styles = createUseStyles({
     base: {
@@ -31,7 +30,6 @@ const styles = createUseStyles({
         gridColumn: 'leftAligned / span 2',
         gridRow: 'textShort / textShort',
         alignSelf: 'start',
-
         textAlign: 'left',
         maxHeight: 50,
         overflow: 'hidden',

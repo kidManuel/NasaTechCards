@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import {
     Card,
@@ -15,10 +15,10 @@ import styles from './styles';
 
 const { CardTitle, CardParagraph, LabeledButton } = Slices;
 
-
 const CardFull = ({ data }) => {
     const classes = styles();
     const theme = TechportTheme();
+    const history = useHistory();
 
     const {
         cardFullContainer,
@@ -68,13 +68,12 @@ const CardFull = ({ data }) => {
         }
     );
 
+    const handleClick = () => (
+        history.length > 2 ? () => { history.goBack() } : () => { history.push('/') }
+    );
+
     const getViewLessButton = () => (
-        <Link
-            to={`/card/${id}`}
-            className="anchor"
-        >
-            <div className="labeledButton">-</div>
-        </Link>
+        <div onClick={handleClick()} className="labeledButton">-</div>
     );
 
     return (
