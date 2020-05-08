@@ -6,15 +6,13 @@
 */
 
 import {
-    getExampleProject,
+    getSingleProject,
     getProjectsByDate,
-    getProjectsUpdatedLastWeek
+    getProjectsUpdatedLastWeek,
 } from './TechportApiUtil';
 
-const API = {
-    getExampleProject,
+export {
+    getSingleProject,
     getProjectsByDate,
-    getProjectsUpdatedLastWeek
+    getProjectsUpdatedLastWeek,
 };
-
-export default API;

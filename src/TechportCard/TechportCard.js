@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import {
     Card,
@@ -8,35 +9,71 @@ import {
     TechportTheme,
     techportStatusColors,
     SimpleOnOff,
+    LabeledData,
 } from '../Components';
 import styles from './styles';
 
 
-function TechportCard({ title, paragraph, projectStatus }) {
+function TechportCard({ cardData }) {
+    const {
+        title,
+        description,
+        status,
+        id,
+        lastUpdated,
+        startDate,
+    } = cardData;
+    const { CardTitle, CardParagraph, LabeledButton } = Slices;
     const classes = styles();
     const themeClasses = TechportTheme();
 
-    const { modalContainer, textRead, title: themeTitle } = themeClasses;
+    const {
+        modalContainer,
+        textRead,
+        title: themeTitle,
+        status: themedStatus,
+        labeledData,
+        labeledButton,
+        bookmark: themedBookmark,
+    } = themeClasses;
+
     const {
         base,
         title: titleClass,
         paragraph: paragraphClass,
-        status: statusClass,
         bookmark,
+        viewMore,
+        projectDates,
+        status: statusClass,
     } = classes;
 
-    const { CardTitle, CardParagraph } = Slices;
+
+    const getViewMoreButton = () => (
+        <Link
+            to={`/card/${id}`}
+            className="anchor"
+        >
+            <div className="labeledButton">+</div>
+        </Link>
+    );
+
+    const getLabeledData = () => (
+        {
+            'Last Updated': lastUpdated,
+            'Start Date': startDate,
+        }
+    );
 
     return (
         <Card customClass={`${base} ${modalContainer}`}>
             <StatusIndicator
                 label="status"
-                currentStatus={projectStatus}
-                customClass={statusClass}
+                currentStatus={status}
+                customClass={`${themedStatus} ${statusClass}`}
                 statusTheme={techportStatusColors}
             />
             <SimpleOnOff
-                customClass={bookmark}
+                customClass={`${themedBookmark} ${bookmark}`}
             />
             <CardTitle
                 text={title}
@@ -44,9 +81,15 @@ function TechportCard({ title, paragraph, projectStatus }) {
                 textClamp={{ lines: 2 }}
             />
             <CardParagraph
-                text={paragraph}
+                text={description}
                 customClass={`${textRead} ${paragraphClass}`}
                 textClamp={{ lines: 2 }}
+            />
+            <LabeledData data={getLabeledData()} customClass={`${labeledData} ${projectDates} `} />
+            <LabeledButton
+                label="More"
+                button={getViewMoreButton()}
+                customClass={`${labeledButton} ${viewMore}`}
             />
         </Card>
     );
@@ -55,13 +98,10 @@ function TechportCard({ title, paragraph, projectStatus }) {
 export default TechportCard;
 
 TechportCard.propTypes = {
-    title: PropTypes.string,
-    paragraph: PropTypes.string,
-    projectStatus: PropTypes.string,
-};
-
-TechportCard.defaultProps = {
-    title: '',
-    paragraph: '',
-    projectStatus: '',
+    cardData: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+        status: PropTypes.string,
+        id: PropTypes.number,
+    }).isRequired,
 };

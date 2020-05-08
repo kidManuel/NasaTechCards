@@ -6,36 +6,15 @@ const {
     API_BASE,
     API_KEY,
     API_SEARCH_BY_DATE,
-    EXAMPLE_PROJECT,
     CURRENT_MAX_ITEMS,
 } = constants;
 
 // TO BE USED ONLY IN DEVELOPMENT
 const useMockData = true;
 
-async function getExampleProject() {
-    const endpoint = API_BASE + EXAMPLE_PROJECT + API_KEY;
-    let exampleProjectInfo;
-
-    await fetch(endpoint)
-        .then(
-            (nasa) => {
-                if (!nasa.ok) console.error('something is wrong');
-                return nasa.json();
-            },
-        )
-        .then(
-            (response) => {
-                exampleProjectInfo = response.project;
-            },
-        );
-    return exampleProjectInfo;
-}
-
 function itemsToIds(items) {
     if (!Array.isArray(items)) {
-        console.error('You must provide an array of projects to be parsed')
-        return null;
+        throw new Error('You must provide an array of projects to be parsed')
     }
 
     const ids = [];
@@ -50,14 +29,30 @@ function itemsToIds(items) {
     return ids;
 }
 
-function getSingleProject(projectId) {
+async function getSingleProject(projectId, memo) {
     const projectEndpoint = `${API_BASE}/${projectId}${API_KEY}`;
-    return fetch(projectEndpoint)
+    let data;
+
+    if (memo[projectId]) {
+        return memo[projectId];
+    }
+
+    if (useMockData) {
+        data = mockData.find((element) => element.id === Number(projectId));
+
+        return data;
+    }
+
+    data = fetch(projectEndpoint)
         .then(
             (response) => response.json(),
         ).then(
             (response) => response.project,
         );
+
+
+    await data;
+    return data;
 }
 
 async function getProjectsByDate(horizonDate, memo) {
@@ -75,7 +70,7 @@ async function getProjectsByDate(horizonDate, memo) {
             },
         ).catch(
             (error) => {
-                console.error(`Something went terribly wrong. Here's the error message if you want it ${error} `);
+                throw new Error(`Something went terribly wrong. Here's the error message if you want it ${error} `);
             },
         );
 
@@ -110,7 +105,7 @@ async function getProjectsUpdatedLastWeek(memo) {
 }
 
 export {
-    getExampleProject,
+    getSingleProject,
     getProjectsByDate,
     getProjectsUpdatedLastWeek,
 };
