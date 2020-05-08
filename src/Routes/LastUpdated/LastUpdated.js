@@ -6,13 +6,16 @@ import TechportCard from '../../TechportCard';
 import styles from './styles';
 
 
-const LastUpdated = ({ content, customClass, enterCallback, itemSelection }) => {
+const LastUpdated = ({
+    content, customClass, enterCallback, itemSelection,
+}) => {
     const classes = styles();
     const theme = TechportTheme();
 
     useEffect(() => {
         enterCallback('Last Updated');
     }, []);
+
     return (
         <div className={`lastUpdated ${customClass}`}>
 
@@ -24,13 +27,17 @@ const LastUpdated = ({ content, customClass, enterCallback, itemSelection }) => 
                 `}
             >
                 {
-                    content.map((singleProject) => (
-                        <TechportCard
-                            cardData={singleProject}
-                            key={singleProject.id}
-                            toggleSelectedCallback={itemSelection}
-                        />
-                    ))
+                    content.map((singleProject) => {
+                        if (singleProject) {
+                            return (
+                                <TechportCard
+                                    cardData={singleProject}
+                                    key={singleProject.id}
+                                    toggleSelectedCallback={itemSelection}
+                                />
+                            );
+                        }
+                    })
                 }
             </PaginationContainer>
         </div>
