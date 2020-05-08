@@ -90,6 +90,8 @@ class App extends Component {
     routeChangeCallback(newRoute) {
         this.setState({
             currentPage: newRoute,
+            hasSelected: false,
+            selected: [],
         })
     }
 
@@ -125,17 +127,38 @@ class App extends Component {
 
         this.setState({
             selected: [],
+            hasSelected: false,
             currentDisplay: newCurrentDisplay,
         })
     }
 
     favouriteElements() {
+        const { selected, favorited } = this.state;
+        const newFavorited = [...favorited];
 
+        selected.forEach((selected) => {
+            if (newFavorited.indexOf(selected) < 0) newFavorited.push(selected);
+        })
+
+        this.setState({
+            selected: [],
+            hasSelected: false,
+            favorited: newFavorited,
+        })
     }
 
+    getFavoritesData() {
+        // For an item to be able to be favorited, it necessarily has to be in memo
+        // So no need to async
+        const { favorited, memo } = this.state;
+
+        const content = favorited.map((favoriteId) => memo[favoriteId])
+
+        return content;
+    }
 
     render() {
-        const { About, LastUpdated, CardFull } = Routes;
+        const { About, LastUpdated, CardFull, Favorites } = Routes;
         const { classes } = this.props;
         const {
             base,
@@ -177,6 +200,16 @@ class App extends Component {
                                                 itemSelection={this.handleItemsSelection}
                                             />
                                         )
+                                    }
+                                </Route>
+
+                                <Route exact path="/favorites">
+                                    {
+                                        <Favorites
+                                            customClass={bodyContent}
+                                            content={this.getFavoritesData()}
+                                            enterCallback={this.routeChangeCallback}
+                                        />
                                     }
                                 </Route>
 

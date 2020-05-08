@@ -13,7 +13,7 @@ const NavBar = ({ customClass }) => (
                 </NavLink>
             </li>
             <li>
-                <NavLink exact activeClassName="selected" className="routeLink" to="/favourites">
+                <NavLink exact activeClassName="selected" className="routeLink" to="/favorites">
                     Your Favorites
                 </NavLink>
             </li>
