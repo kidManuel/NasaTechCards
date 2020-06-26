@@ -10,7 +10,7 @@ const {
 } = constants;
 
 // TO BE USED ONLY IN DEVELOPMENT
-const useMockData = false;
+const useMockData = true;
 
 function itemsToIds(items) {
     if (!Array.isArray(items)) {

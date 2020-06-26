@@ -62,7 +62,7 @@ const styles = createUseStyles({
     status: {
         gridColumn: 'leftAligned / leftAligned',
         gridRow: 'header / header',
-    }
+    },
 });
 
 export default styles;

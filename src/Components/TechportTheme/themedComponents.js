@@ -26,8 +26,8 @@ const theme = createUseStyles({
     title: {
         fontFamily: 'tussilago',
         color: 'white',
-        fontSize: 32,
-        lineHeight: '32px',
+        fontSize: 20,
+        lineHeight: '20px',
         marginBottom: 20,
         textTransform: 'uppercase',
         overflowWrap: 'break-word',
